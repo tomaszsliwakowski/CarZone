@@ -1,5 +1,12 @@
+import FiltrWithList from "../filtr/filtrWithList";
 import "./filters.scss";
 
 export default function Filters() {
-  return <div>filters</div>;
+  return (
+    <div className="filtersBar">
+      <div className="body">
+        <FiltrWithList />
+      </div>
+    </div>
+  );
 }
