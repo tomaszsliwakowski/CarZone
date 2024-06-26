@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./filtr.scss";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaCheck } from "react-icons/fa";
+import { useClickOutSide } from "../../hooks/useClickOutSide";
 
 type PROPS = {
   list: string[];
-  className: string;
 };
 
-export default function FiltrWithOptionsList({ list, className }: PROPS) {
+export default function FiltrWithOptionsList({ list }: PROPS) {
   const [state, setState] = useState(false);
   const [selected, setSelected] = useState<Array<string>>([]);
+
+  const ref = useClickOutSide(() => setState(false));
 
   const selectHandler = (el: string): void => {
     if (selected.length === 0) {
@@ -24,38 +26,16 @@ export default function FiltrWithOptionsList({ list, className }: PROPS) {
     }
   };
 
-  useEffect(() => {
-    if (!state) return;
-    const parent = document.querySelector("body");
-
-    function closeModal(e: Event) {
-      let target = e.target as HTMLElement;
-      if (!target.className) return;
-      if (!target.className.includes(className)) {
-        setState(false);
-      }
-    }
-
-    if (parent) {
-      parent.addEventListener("click", closeModal);
-    }
-    return () => {
-      if (parent) {
-        parent.removeEventListener("click", closeModal);
-      }
-    };
-  }, [state]);
-
   return (
     <div className="filtr">
       <div
-        className={`filtrInput select ${state ? className : ""}`}
+        ref={ref}
+        className="filtrInput select"
         onClick={() => setState((prev) => !prev)}
       >
         <input
           type="text"
           placeholder="Brand"
-          className={state ? className : ""}
           value={
             selected[0]
               ? `${selected.length === 1 ? selected[0] : "Selected"} ${
@@ -67,23 +47,19 @@ export default function FiltrWithOptionsList({ list, className }: PROPS) {
         {state ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </div>
       {state ? (
-        <ul className={`filtrList ${state ? className : ""}`}>
+        <ul className="filtrList">
           {list.map((el, id) => (
-            <li
-              key={id}
-              onClick={() => selectHandler(el)}
-              className={`${state ? className : ""}`}
-            >
+            <li key={id} onClick={() => selectHandler(el)}>
               <div
                 className={`checkbox ${
                   selected.indexOf(el) !== -1 ? "checked" : ""
-                } ${state ? className : ""}`}
+                } `}
               >
                 {selected.length > 0 && selected.indexOf(el) !== -1 ? (
                   <FaCheck />
                 ) : null}
               </div>
-              <span className={`${state ? className : ""}`}>{el}</span>
+              <span>{el}</span>
             </li>
           ))}
         </ul>

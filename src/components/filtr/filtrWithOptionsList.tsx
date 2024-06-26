@@ -1,48 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./filtr.scss";
+import { useClickOutSide } from "../../hooks/useClickOutSide";
 
 type PROPS = {
   list: string[];
-  className: string;
 };
 
-export default function FiltrWithList({ list, className }: PROPS) {
+export default function FiltrWithList({ list }: PROPS) {
   const [state, setState] = useState(false);
   const [selected, setSelected] = useState<string>("");
+
+  const ref = useClickOutSide(() => setState(false));
 
   const selectHandler = (el: string): void => {
     setSelected(el);
   };
 
-  useEffect(() => {
-    if (!state) return;
-    const parent = document.querySelector("body");
-
-    function closeModal(e: Event) {
-      let target = e.target as HTMLElement;
-      if (!target.className) return;
-      if (!target.className.includes(className)) {
-        setState(false);
-      }
-    }
-
-    if (parent) {
-      parent.addEventListener("click", closeModal);
-    }
-    return () => {
-      if (parent) {
-        parent.removeEventListener("click", closeModal);
-      }
-    };
-  }, [state]);
-
   return (
     <div className="filtr">
-      <div className={`filtrInput ${state ? className : ""}`}>
+      <div ref={ref} className="filtrInput">
         <input
           type="text"
           placeholder="Mileage from"
-          className={state ? className : ""}
           value={selected}
           onClick={() => setState((prev) => !prev)}
         />
@@ -51,13 +30,9 @@ export default function FiltrWithList({ list, className }: PROPS) {
         ) : null}
       </div>
       {state ? (
-        <ul className={`filtrList ${state ? className : ""}`}>
+        <ul className="filtrList">
           {list.map((el, id) => (
-            <li
-              key={id}
-              onClick={() => selectHandler(el)}
-              className={`${state ? className : ""}`}
-            >
+            <li key={id} onClick={() => selectHandler(el)}>
               {el}
             </li>
           ))}
