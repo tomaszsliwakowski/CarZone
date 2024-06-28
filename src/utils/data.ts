@@ -4,6 +4,7 @@ type ModelsType = {
 };
 
 export const carModels: ModelsType[] = [
+  { brand: "All", models: [] },
   {
     brand: "BMW",
     models: [
