@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./filtr.scss";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
@@ -8,14 +8,27 @@ import { useClickOutSide } from "../../hooks/useClickOutSide";
 type PROPS = {
   list: string[];
   name: string;
+  queryName: string;
+  handleChange: Function;
+  searchParams: URLSearchParams;
 };
 
-export default function FiltrWithOptionsList({ list, name }: PROPS) {
+export default function FiltrWithOptionsList({
+  list,
+  name,
+  queryName,
+  handleChange,
+  searchParams,
+}: PROPS) {
   const [state, setState] = useState(false);
-  const [selected, setSelected] = useState<Array<string>>([]);
-  const [value, setValue] = useState("");
+  const [selected, setSelected] = useState<Array<string>>(
+    searchParams?.get(queryName)?.split(",") || []
+  );
+  const [filtrValue, setFiltrValue] = useState("");
 
-  const ref = useClickOutSide(() => setState(false));
+  const ref = useClickOutSide(() => {
+    if (state) setState(false);
+  });
 
   const selectHandler = (el: string): void => {
     if (selected.length === 0 && el !== "All") {
@@ -28,11 +41,16 @@ export default function FiltrWithOptionsList({ list, name }: PROPS) {
     } else {
       setSelected((prev) => (prev.length === list.length ? [] : list));
     }
-    setValue("");
+    setFiltrValue("");
   };
 
+  useEffect(() => {
+    if (state) return;
+    handleChange(queryName, selected.toString());
+  }, [state]);
+
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setFiltrValue(e.target.value);
   };
 
   return (
@@ -43,6 +61,7 @@ export default function FiltrWithOptionsList({ list, name }: PROPS) {
       >
         <input
           type="text"
+          name={name}
           placeholder={name}
           onChange={inputHandler}
           value={
@@ -50,7 +69,7 @@ export default function FiltrWithOptionsList({ list, name }: PROPS) {
               ? `${selected.length === 1 ? selected[0] : "Selected"} ${
                   selected.length > 1 && selected[0] ? selected.length : ""
                 }`
-              : value
+              : filtrValue
           }
         />
         {state ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -58,7 +77,9 @@ export default function FiltrWithOptionsList({ list, name }: PROPS) {
       {state ? (
         <ul className="filtrList">
           {list
-            .filter((item) => item.toLowerCase().includes(value.toLowerCase()))
+            .filter((item) =>
+              item.toLowerCase().includes(filtrValue.toLowerCase())
+            )
             .map((el, id) => (
               <li key={id} onClick={() => selectHandler(el)}>
                 <div

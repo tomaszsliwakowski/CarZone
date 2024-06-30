@@ -562,3 +562,35 @@ export const mileageList: string[] = [
   "250000",
   "300000",
 ];
+
+export const powerList: string[] = [
+  "50",
+  "80",
+  "120",
+  "150",
+  "200",
+  "300",
+  "500",
+];
+
+export const capasityList: string[] = [
+  "50",
+  "80",
+  "120",
+  "250",
+  "500",
+  "600",
+  "750",
+  "1000",
+  "1250",
+  "1500",
+  "2000",
+  "2500",
+  "3000",
+  "4000",
+  "5000",
+  "6000",
+];
+
+export const gearList: string[] = ["Automatic", "Manual"];
+export const driveList: string[] = ["FWD", "RWD", "AWD"];
