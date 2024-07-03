@@ -7,7 +7,7 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 
 export default function Navbar() {
-  const [menu, setMenu] = useState<boolean>(true);
+  const [menu, setMenu] = useState<boolean>(false);
   return (
     <div className="navbar">
       <div className="logo">

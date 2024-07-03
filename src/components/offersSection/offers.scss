@@ -1,18 +1,14 @@
-.filtersBar {
+.offers {
   width: 100%;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--second-bg-color);
+  background-color: var(--first-bg-color);
   .body {
     background-color: inherit;
     width: 100%;
     max-width: 1250px;
     padding: 2rem 1.5rem;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
   }
 }

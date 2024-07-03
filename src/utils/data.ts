@@ -594,3 +594,13 @@ export const capasityList: string[] = [
 
 export const gearList: string[] = ["Automatic", "Manual"];
 export const driveList: string[] = ["FWD", "RWD", "AWD"];
+
+export const sortList: string[] = [
+  "Latest",
+  "Price from the lowest",
+  "Price from the highest",
+  "Mileage from the lowest",
+  "Mileage from the highest",
+  "Highest engine power",
+  "Lowest engine power",
+];

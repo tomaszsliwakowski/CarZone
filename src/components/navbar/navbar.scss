@@ -119,11 +119,14 @@
     width: 100%;
     top: 65px;
     background-color: var(--first-bg-color);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 5%;
+    @include sm {
+      display: flex;
+    }
     a {
       display: flex;
       align-items: center;
