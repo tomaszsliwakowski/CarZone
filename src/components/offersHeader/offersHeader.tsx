@@ -4,7 +4,7 @@ import "./offersHeader.scss";
 export default function OffersHeader() {
   const { handleChange, searchParams } = useFilterParams();
   const brand = searchParams.get("brand");
-  console.log(brand);
+
   return (
     <div className="offers__header">
       <div className="info">

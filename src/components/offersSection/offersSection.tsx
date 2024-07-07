@@ -1,11 +1,13 @@
+import Offers from "../offers/offers";
 import OffersHeader from "../offersHeader/offersHeader";
-import "./offers.scss";
+import "./offersSection.scss";
 
 export default function OffersSection() {
   return (
-    <div className="offers">
+    <div className="offers__section">
       <div className="body">
         <OffersHeader />
+        <Offers />
       </div>
     </div>
   );

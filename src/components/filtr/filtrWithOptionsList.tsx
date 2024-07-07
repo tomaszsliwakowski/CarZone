@@ -11,6 +11,7 @@ type PROPS = {
   queryName: string;
   handleChange: Function;
   searchParams: URLSearchParams;
+  status?: boolean;
 };
 
 export default function FiltrWithOptionsList({
@@ -19,6 +20,7 @@ export default function FiltrWithOptionsList({
   queryName,
   handleChange,
   searchParams,
+  status = true,
 }: PROPS) {
   const [state, setState] = useState(false);
   const [selected, setSelected] = useState<Array<string>>(
@@ -56,14 +58,15 @@ export default function FiltrWithOptionsList({
   return (
     <div className="filtr" ref={ref}>
       <div
-        className="filtrInput select"
-        onClick={() => setState((prev) => !prev)}
+        className={`filtrInput select ${!status ? "off" : ""}`}
+        onClick={() => (status ? setState((prev) => !prev) : null)}
       >
         <input
           type="text"
           name={name}
           placeholder={name}
           onChange={inputHandler}
+          disabled={!status}
           value={
             selected[0]
               ? `${selected.length === 1 ? selected[0] : "Selected"} ${
@@ -72,9 +75,9 @@ export default function FiltrWithOptionsList({
               : filtrValue
           }
         />
-        {state ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        {state && status ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </div>
-      {state ? (
+      {state && status && list ? (
         <ul className="filtrList">
           {list
             .filter((item) =>

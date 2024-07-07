@@ -17,7 +17,8 @@ import "./filters.scss";
 
 export default function Filters() {
   const { handleChange, searchParams } = useFilterParams();
-
+  const brand = searchParams.get("brand");
+  const modelsList = carModels.find((item) => item.brand === brand)?.models;
   return (
     <div className="filtersBar">
       <div className="body">
@@ -29,11 +30,12 @@ export default function Filters() {
           searchParams={searchParams}
         />
         <FiltrWithOptionsList
-          list={carModels[1].models}
+          list={carModels.find((item) => item.brand === brand)?.models || []}
           name="Models"
           queryName="models"
           handleChange={handleChange}
           searchParams={searchParams}
+          status={modelsList ? true : false}
         />
         <FiltrWithOptionsList
           list={bodyTypeList}
