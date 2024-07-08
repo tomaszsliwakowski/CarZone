@@ -1,3 +1,4 @@
+@import "../../responsive.scss";
 .offers__section {
   width: 100%;
   height: auto;
@@ -10,5 +11,11 @@
     width: 100%;
     max-width: 1250px;
     padding: 2rem 1.5rem;
+    @include md {
+      padding: 2rem 1rem;
+    }
+    @include sm {
+      padding: 2rem 0rem;
+    }
   }
 }
