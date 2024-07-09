@@ -1,0 +1,88 @@
+@import "../../responsive.scss";
+
+.footer {
+  height: auto;
+  background-color: var(--second-bg-color);
+  display: flex;
+  justify-content: center;
+  .container {
+    width: 100%;
+    max-width: 1250px;
+    padding: 2rem 2.4rem 0.25rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    div:nth-child(1) {
+      padding: 0 0 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      @include md {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    span {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+    .contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: white;
+
+      h4 {
+        font-size: 20px;
+      }
+      ul {
+        display: flex;
+        list-style-type: none;
+        gap: 2rem;
+        flex-wrap: wrap;
+        @include sm {
+          gap: 1rem;
+        }
+        li {
+          a {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 16px;
+            svg {
+              font-size: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .other {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 0.5rem;
+    @include md {
+      display: flex;
+      align-items: start;
+    }
+    h4 {
+      font-size: 22px;
+      color: white;
+    }
+    ul {
+      display: flex;
+      gap: 2rem;
+      list-style-type: none;
+      flex-wrap: wrap;
+      @include md {
+        gap: 1rem;
+      }
+      li {
+        color: white;
+        font-size: 16px;
+      }
+    }
+  }
+}

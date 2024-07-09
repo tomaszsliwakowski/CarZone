@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--first-bg-color);
+  flex-direction: column;
   .offers__list {
     background-color: inherit;
     width: 100%;
@@ -162,7 +163,7 @@
             line-height: 26px;
             font-size: 24px;
             @include sm {
-              font-size: 20px;
+              font-size: 22px;
             }
           }
           p {

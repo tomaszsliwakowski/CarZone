@@ -1,0 +1,41 @@
+.pagination {
+  padding: 1rem 0;
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 1rem;
+
+    .pagination__el {
+      color: var(--blue-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      padding: 2px;
+      cursor: pointer;
+      svg {
+        font-size: 34px;
+      }
+    }
+    .pagination__el__num {
+      border: 1px solid var(--blue-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      font-size: 18px;
+      color: var(--blue-color);
+      padding: 2px 0 0 0;
+      font-weight: bold;
+      cursor: pointer;
+      &.selected {
+        background-color: var(--blue-color);
+        color: white;
+      }
+    }
+  }
+}
