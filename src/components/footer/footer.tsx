@@ -1,7 +1,6 @@
 import "./footer.scss";
-import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { BsFacebook, BsYoutube, BsTwitter } from "react-icons/bs";
+import { BsFacebook, BsYoutube } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import { Link } from "react-router-dom";
 

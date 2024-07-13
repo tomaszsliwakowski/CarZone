@@ -6,7 +6,21 @@
   font-family: "Lato", sans-serif;
   --first-bg-color: rgb(27, 30, 31);
   --second-bg-color: rgb(40, 43, 44);
+  --inActive-color: rgb(59, 62, 63);
   --blue-color: #005aa5;
+
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #818181;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #504f4f;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3e3e;
+  }
 }
 
 a {
