@@ -1,0 +1,39 @@
+@import "../../responsive.scss";
+
+.notFound__container {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--second-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    @include sm {
+      padding: 0rem 1rem;
+    }
+    h1 {
+      font-size: 5rem;
+      color: silver;
+      @include sm {
+        font-size: 4rem;
+      }
+    }
+    a {
+      font-size: 1.8rem;
+      text-align: center;
+      background-color: var(--blue-color);
+      border-radius: 1rem;
+      padding: 15px 10px;
+      color: silver;
+      font-weight: bold;
+      transition: all 0.3s;
+      cursor: pointer;
+      &:hover {
+        background-color: darken(#005aa5, 5%);
+      }
+    }
+  }
+}

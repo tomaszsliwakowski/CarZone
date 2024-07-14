@@ -5,9 +5,11 @@ import { FaPlus } from "react-icons/fa6";
 import { IoMenuOutline } from "react-icons/io5";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [menu, setMenu] = useState<boolean>(false);
+  const { pathname } = useLocation();
   return (
     <div className="navbar">
       <div className="logo">
@@ -20,29 +22,32 @@ export default function Navbar() {
           </span>
         </Link>
       </div>
-      <div className="right">
-        <div className="user">
-          <FaUser />
-          <div className="userAuth">
-            <Link to={"/login"}>Login</Link>
-            <span>|</span>
-            <Link to={"/register"}>Register</Link>
+      {pathname && pathname === "/auth" ? null : (
+        <div className="right">
+          <div className="user">
+            <FaUser />
+            <div className="userAuth">
+              <Link to={"/auth?type=login"}>Login</Link>
+              <span>|</span>
+              <Link to={"/auth?type=register"}>Register</Link>
+            </div>
+          </div>
+
+          <div className="sell">
+            <Link to={"/sell"}>
+              <FaPlus /> Start Selling
+            </Link>
+          </div>
+          <div className="menu">
+            {menu ? (
+              <IoClose onClick={() => setMenu((prev) => !prev)} />
+            ) : (
+              <IoMenuOutline onClick={() => setMenu((prev) => !prev)} />
+            )}
           </div>
         </div>
-        <div className="sell">
-          <Link to={"/sell"}>
-            <FaPlus /> Start Selling
-          </Link>
-        </div>
-        <div className="menu">
-          {menu ? (
-            <IoClose onClick={() => setMenu((prev) => !prev)} />
-          ) : (
-            <IoMenuOutline onClick={() => setMenu((prev) => !prev)} />
-          )}
-        </div>
-      </div>
-      {menu ? (
+      )}
+      {menu && pathname !== "/auth" ? (
         <div className="fullMenu">
           <Link to={"/sell"}>
             <FaPlus /> Start Selling
