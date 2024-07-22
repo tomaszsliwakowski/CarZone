@@ -8,7 +8,12 @@ export default function OffersHeader() {
   return (
     <div className="offers__header">
       <div className="info">
-        <h2>{brand ? brand.split(",")[0] + " - " : null}Cars</h2>
+        <h2>
+          {brand && brand.split(",").length === 1
+            ? brand.split(",")[0] + " - "
+            : null}
+          Cars
+        </h2>
         <span>
           Number of offers: <b>2300</b>
         </span>

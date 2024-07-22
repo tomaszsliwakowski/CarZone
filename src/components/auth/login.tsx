@@ -15,16 +15,14 @@ export default function Login() {
 
   const onUpdateField = (e: ChangeEvent<HTMLInputElement>) => {
     const field = e.target.name;
-    const nextFormState = {
-      ...form,
-      [field]: e.target.value,
-    };
-    setForm(nextFormState);
-    validateForm({ form, field });
+    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    const newForm: AuthFormType = { ...form, [field]: e.target.value };
+    validateForm({ form: newForm, field });
   };
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(form);
   };
   return (
     <form className="loginForm" onSubmit={onSubmitForm}>

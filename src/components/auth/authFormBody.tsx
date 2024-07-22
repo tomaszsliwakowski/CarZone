@@ -28,7 +28,6 @@ export default function AuthFormBody({
             name="email"
             type="email"
             className={errors.email.error ? "error" : ""}
-            pattern=".+@example\.com"
             size={30}
             required
             value={form.email}

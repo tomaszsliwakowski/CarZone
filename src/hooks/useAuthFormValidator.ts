@@ -37,25 +37,32 @@ export const useAuthFormValidator = (form: AuthFormType) => {
 
   const validateForm = ({ form, field }: ValidateProps) => {
     const { email, password } = form;
-    let isValid: boolean = true;
 
     if (field === "email") {
       const emailMessage: string = emailValidator(email);
       if (emailMessage !== "") {
-        isValid = true;
         setErrors((prev) => ({
           ...prev,
           [field]: { error: true, message: emailMessage },
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: { error: false, message: "" },
         }));
       }
     }
     if (field === "password") {
       const passwordMessage: string = passwordValidator(password);
       if (passwordMessage !== "") {
-        isValid = true;
         setErrors((prev) => ({
           ...prev,
           [field]: { error: true, message: passwordMessage },
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: { error: false, message: "" },
         }));
       }
     }
