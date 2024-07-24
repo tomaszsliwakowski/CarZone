@@ -22,7 +22,12 @@ export default function Login() {
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
+    if (form.email === "") {
+      validateForm({ form, field: "email" });
+    }
+    if (form.password === "") {
+      validateForm({ form, field: "password" });
+    }
   };
   return (
     <form className="loginForm" onSubmit={onSubmitForm}>

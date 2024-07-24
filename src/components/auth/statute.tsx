@@ -1,13 +1,28 @@
 import { FaCheck } from "react-icons/fa";
 import "./auth.scss";
 
-export default function StatuteCheckbox() {
+type PROPS = {
+  checked: boolean;
+  checkHandler: Function;
+  error: boolean;
+};
+
+export default function StatuteCheckbox({
+  checked,
+  checkHandler,
+  error,
+}: PROPS) {
   return (
     <div className="statute">
-      <div className="statute__checkbox">
-        <input type="checkbox" name="statute" />
+      <div className={`statute__checkbox ${error ? "error" : ""}`}>
+        <input
+          type="checkbox"
+          name="statute"
+          checked={checked}
+          onChange={() => checkHandler()}
+        />
         <div className="statute__checkbox__icon">
-          <FaCheck />
+          {checked ? <FaCheck /> : null}
         </div>
       </div>
       <div className="statute__info">
@@ -17,6 +32,7 @@ export default function StatuteCheckbox() {
           accordance with the Privacy Policy and the Policy regarding cookies
           and similar technologies, which I have read.
         </p>
+        {error ? <span>Please select agree to continue</span> : null}
       </div>
     </div>
   );

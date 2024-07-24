@@ -29,7 +29,6 @@ export default function AuthFormBody({
             type="email"
             className={errors.email.error ? "error" : ""}
             size={30}
-            required
             value={form.email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onUpdateField(e)
@@ -50,7 +49,6 @@ export default function AuthFormBody({
             type={visible ? "text" : "password"}
             className={errors.password.error ? "error" : ""}
             size={30}
-            required
             value={form.password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onUpdateField(e)

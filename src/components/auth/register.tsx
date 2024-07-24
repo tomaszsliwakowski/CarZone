@@ -12,7 +12,13 @@ export default function Register() {
     email: "",
     password: "",
   });
-  const [statute, setStatue] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [checkedError, setCheckedError] = useState<boolean>(false);
+
+  const checkHandler = () => {
+    setChecked((prev) => !prev);
+    if (checkedError && !checked) setCheckedError(false);
+  };
   const { errors, validateForm, onBlurField } = useAuthFormValidator(form);
 
   const onUpdateField = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,17 +30,29 @@ export default function Register() {
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
+    if (!checked) {
+      setCheckedError(true);
+    }
+    if (form.email === "") {
+      validateForm({ form, field: "email" });
+    }
+    if (form.password === "") {
+      validateForm({ form, field: "password" });
+    }
   };
   return (
-    <form className="registerForm">
+    <form className="registerForm" onSubmit={onSubmitForm}>
       <AuthFormBody
         onUpdateField={onUpdateField}
         onBlurField={onBlurField}
         form={form}
         errors={errors}
       />
-      <StatuteCheckbox />
+      <StatuteCheckbox
+        checkHandler={checkHandler}
+        checked={checked}
+        error={checkedError}
+      />
       <div className="register__action">
         <button type="submit">
           <span>Register</span>
