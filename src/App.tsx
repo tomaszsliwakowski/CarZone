@@ -6,6 +6,8 @@ import NotFound from "./routes/notFoundPage/notFound";
 import AuthPage from "./routes/authPage/authPage";
 import SellPage from "./routes/sellPage/sellPage";
 import { AuthContextProvider } from "./context/authContext";
+import ProfilePage from "./routes/profilePage/profilePage";
+import SingleOfferPage from "./routes/SingleOfferPage/singleOfferPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,12 +17,16 @@ function App() {
       children: [
         { path: "/", element: <Homepage /> },
         { path: "/auth", element: <AuthPage /> },
+        { path: "/offer/:name/:id", element: <SingleOfferPage /> },
       ],
     },
     {
       path: "/",
       element: <RequireAuth />,
-      children: [{ path: "/sell", element: <SellPage /> }],
+      children: [
+        { path: "/sell", element: <SellPage /> },
+        { path: "/profile", element: <ProfilePage /> },
+      ],
     },
     { path: "*", element: <NotFound /> },
   ]);

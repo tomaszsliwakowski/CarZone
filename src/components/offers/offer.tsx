@@ -21,7 +21,7 @@ export default function Offer({ offer }: PROPS) {
       <div className="offer__container-second">
         <div className="offer__carInfoContainer">
           <div className="offer__title">
-            <Link to={"/"}>{offer.name}</Link>
+            <Link to={`/offer/${offer.name}/1`}>{offer.name}</Link>
             <p>
               {offer.capacity + " cm3"}&nbsp;&bull;&nbsp;
               {offer.power + " KM"}

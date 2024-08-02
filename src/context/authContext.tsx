@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     setCurrentUser(data);
   };
 
-  const updateLaoding = (action: boolean) => {
+  const updateLoading = (action: boolean) => {
     setIsLoading(action);
   };
   useEffect(() => {
@@ -37,10 +37,10 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         .get("")
         .then((res) => {
           // updateUser(res.data);
-          //  updateLaoding(false);
+          //  updateLoading(false);
         })
         .catch(() => {
-          //updateLaoding(false);
+          //updateLosding(false);
         });
     };
     request();

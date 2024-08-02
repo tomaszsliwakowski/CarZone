@@ -1,0 +1,19 @@
+@import "../../responsive.scss";
+
+.singleOffer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  background-color: var(--first-bg-color);
+  .container {
+    background-color: inherit;
+    width: 100%;
+    max-width: 1250px;
+    padding: 2rem 0rem;
+    color: white;
+    @include sm {
+      padding: 2rem 1rem 2rem 1rem;
+    }
+  }
+}
