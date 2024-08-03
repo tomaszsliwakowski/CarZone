@@ -1,18 +1,18 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "../../components/navbar/navbar";
 import "./layout.scss";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 
 export function Layout() {
   return (
     <div className="layout">
-      <div className="navbar">
+      <header>
         <Navbar />
-      </div>
-      <div className="content">
+      </header>
+      <main>
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 }
@@ -23,12 +23,12 @@ export function RequireAuth() {
     <Navigate to="/auth?type=login" />
   ) : (
     <div className="layout">
-      <div className="navbar">
+      <header>
         <Navbar />
-      </div>
-      <div className="content">
+      </header>
+      <main>
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 }

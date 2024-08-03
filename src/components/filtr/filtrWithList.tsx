@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./filtr.scss";
 import { useClickOutSide } from "../../hooks/useClickOutSide";
 

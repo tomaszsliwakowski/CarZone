@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div className="footer">
+    <footer>
       <div className="container">
         <div>
           <div className="contact">
@@ -57,6 +57,6 @@ export default function Footer() {
         </div>
         <span>&copy; Copyright {new Date().getFullYear()}</span>
       </div>
-    </div>
+    </footer>
   );
 }
