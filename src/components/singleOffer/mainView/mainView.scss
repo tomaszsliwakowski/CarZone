@@ -54,14 +54,21 @@
       }
     }
     .smallSlider {
-      display: flex;
-      gap: 1rem;
       overflow: hidden;
-      img {
-        width: 128px;
-        height: auto;
-        max-height: 96px;
-        border-radius: 5px;
+      div {
+        display: flex;
+        gap: 1rem;
+        transition: all 0.5s;
+        img {
+          width: 128px;
+          height: auto;
+          max-height: 96px;
+          border-radius: 5px;
+          filter: brightness(50%);
+          &.current {
+            filter: brightness(100%);
+          }
+        }
       }
     }
   }

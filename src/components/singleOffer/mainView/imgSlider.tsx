@@ -19,23 +19,59 @@ const images: string[] = [
 
 export default function ImgSlider() {
   const [currentImg, setCurrentImg] = useState<number>(0);
+  const [transformValue, setTransformValue] = useState(0);
+
+  const currentImageHandler = (index: number): void => {
+    console.log(`index ${index}`);
+    setCurrentImg(index);
+    if (index + 5 < images.length) {
+      setTransformValue(128 * index + index * 16);
+    }
+  };
+
+  const sliderHandler = (type: string): void => {
+    if (type === "back") {
+      setCurrentImg((prev) => (prev <= 0 ? prev : prev - 1));
+      if (currentImg + 5 < images.length) {
+        setTransformValue((prev) => prev - 128 - 16);
+      }
+    } else if (type === "forward") {
+      setCurrentImg((prev) => (prev < images.length - 1 ? prev + 1 : prev));
+      if (currentImg + 6 < images.length) {
+        setTransformValue(128 * (currentImg + 1) + (currentImg + 1) * 16);
+      }
+    }
+  };
+  const style = {
+    transform: `translateX(-${transformValue}px)`,
+  };
+
   return (
     <div className="images">
       <div className="slider">
-        <div className="arrow back">
+        <div className="arrow back" onClick={() => sliderHandler("back")}>
           <IoIosArrowBack />
         </div>
         <div className="currentImage">
           <img src={images[currentImg]} alt="image" />
         </div>
-        <div className="arrow forward">
+        <div className="arrow forward" onClick={() => sliderHandler("forward")}>
           <IoIosArrowForward />
         </div>
       </div>
       <div className="smallSlider">
-        {images.map((image, id) => (
-          <img src={image} alt="image" key={id} />
-        ))}
+        <div style={style}>
+          {images.map((image, index) => (
+            <img
+              src={image}
+              alt="image"
+              key={index}
+              data-id={index}
+              className={`${currentImg === index ? "current" : ""}`}
+              onClick={() => currentImageHandler(index)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
