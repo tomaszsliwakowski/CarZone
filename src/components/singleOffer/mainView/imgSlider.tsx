@@ -2,6 +2,10 @@ import { useState } from "react";
 import "./mainView.scss";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
+import TopOfferInfo from "./TopOfferInfo";
+import { BsArrowsFullscreen } from "react-icons/bs";
+import { MdOutlinePhotoCamera } from "react-icons/md";
 
 const images: string[] = [
   "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
@@ -19,10 +23,10 @@ const images: string[] = [
 
 export default function ImgSlider() {
   const [currentImg, setCurrentImg] = useState<number>(0);
-  const [transformValue, setTransformValue] = useState(0);
+  const [transformValue, setTransformValue] = useState<number>(0);
+  const [fullSliderToggle, setFullSliderToggle] = useState<boolean>(false);
 
   const currentImageHandler = (index: number): void => {
-    console.log(`index ${index}`);
     setCurrentImg(index);
     if (index + 5 < images.length) {
       setTransformValue(128 * index + index * 16);
@@ -42,21 +46,59 @@ export default function ImgSlider() {
       }
     }
   };
+
+  const sliderToggleHandler = (action: string) => {
+    if (action === "open" && !fullSliderToggle) {
+      setFullSliderToggle(true);
+    } else if (action === "close" && fullSliderToggle) {
+      setFullSliderToggle(false);
+    }
+  };
+
   const style = {
     transform: `translateX(-${transformValue}px)`,
   };
 
   return (
-    <div className="images">
+    <div className={`images ${fullSliderToggle ? "full" : ""}`}>
+      <div className="fullScreen__offerInfo">
+        <TopOfferInfo />
+        <div className="close">
+          <IoMdClose onClick={() => sliderToggleHandler("close")} />
+        </div>
+      </div>
       <div className="slider">
-        <div className="arrow back" onClick={() => sliderHandler("back")}>
+        <div
+          className={`arrow back ${currentImg === 0 ? "off" : ""}`}
+          onClick={() => sliderHandler("back")}
+        >
           <IoIosArrowBack />
         </div>
-        <div className="currentImage">
+        <div
+          className="currentImage"
+          onClick={() => sliderToggleHandler("open")}
+        >
           <img src={images[currentImg]} alt="image" />
         </div>
-        <div className="arrow forward" onClick={() => sliderHandler("forward")}>
+        <div
+          className={`arrow forward ${
+            currentImg === images.length - 1 ? "off" : ""
+          }`}
+          onClick={() => sliderHandler("forward")}
+        >
           <IoIosArrowForward />
+        </div>
+        <span
+          className="fullScreen__icon"
+          onClick={() => sliderToggleHandler("open")}
+        >
+          <BsArrowsFullscreen />
+        </span>
+        <div className="numberOfPhotos">
+          <MdOutlinePhotoCamera />{" "}
+          <span>
+            {`${currentImg + 1}`}&nbsp;/&nbsp;{`${images.length}`}
+          </span>
         </div>
       </div>
       <div className="smallSlider">
@@ -66,7 +108,6 @@ export default function ImgSlider() {
               src={image}
               alt="image"
               key={index}
-              data-id={index}
               className={`${currentImg === index ? "current" : ""}`}
               onClick={() => currentImageHandler(index)}
             />
