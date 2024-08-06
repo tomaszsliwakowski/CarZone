@@ -24,12 +24,35 @@ const images: string[] = [
 export default function ImgSlider() {
   const [currentImg, setCurrentImg] = useState<number>(0);
   const [transformValue, setTransformValue] = useState<number>(0);
-  const [fullSliderToggle, setFullSliderToggle] = useState<boolean>(false);
+  const [isOpen, setisOpen] = useState<boolean>(false);
 
   const currentImageHandler = (index: number): void => {
+    const gap: number = 16;
+    const imgWidth: number = 157;
+    const currentIndex: number = currentImg < 2 ? 2 : currentImg;
     setCurrentImg(index);
-    if (index + 5 < images.length) {
-      setTransformValue(128 * index + index * 16);
+    if (index > currentImg) {
+      if (index >= images.length - 3) {
+        setTransformValue(
+          (images.length - 5) * imgWidth + (images.length - 5) * gap
+        );
+      } else {
+        setTransformValue((prev) =>
+          index < 3
+            ? (index - currentIndex) * imgWidth + (index - currentIndex) * gap
+            : prev +
+              (index - currentIndex) * imgWidth +
+              (index - currentIndex) * gap
+        );
+      }
+    } else if (index < currentImg && index < images.length - 3) {
+      setTransformValue((prev) =>
+        index < 3
+          ? 0
+          : prev -
+            (currentIndex - index) * imgWidth -
+            (currentIndex - index) * gap
+      );
     }
   };
 
@@ -48,10 +71,10 @@ export default function ImgSlider() {
   };
 
   const sliderToggleHandler = (action: string) => {
-    if (action === "open" && !fullSliderToggle) {
-      setFullSliderToggle(true);
-    } else if (action === "close" && fullSliderToggle) {
-      setFullSliderToggle(false);
+    if (action === "open" && !isOpen) {
+      setisOpen(true);
+    } else if (action === "close" && isOpen) {
+      setisOpen(false);
     }
   };
 
@@ -60,7 +83,7 @@ export default function ImgSlider() {
   };
 
   return (
-    <div className={`images ${fullSliderToggle ? "full" : ""}`}>
+    <div className={`images ${isOpen ? "full" : ""}`}>
       <div className="fullScreen__offerInfo">
         <TopOfferInfo />
         <div className="close">

@@ -155,15 +155,17 @@
     }
     .smallSlider {
       overflow: hidden;
+
       div {
         display: flex;
         gap: 1rem;
         transition: all 0.5s;
         max-width: 850px;
+
         img {
-          width: 128px;
+          width: 157px;
           height: auto;
-          max-height: 96px;
+          // max-height: 96px;
           border-radius: 5px;
           filter: brightness(50%);
           &.current {
