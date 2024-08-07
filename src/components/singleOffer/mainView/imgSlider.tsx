@@ -25,10 +25,10 @@ export default function ImgSlider() {
   const [currentImg, setCurrentImg] = useState<number>(0);
   const [transformValue, setTransformValue] = useState<number>(0);
   const [isOpen, setisOpen] = useState<boolean>(false);
+  const gap: number = 16;
+  const imgWidth: number = 157;
 
   const currentImageHandler = (index: number): void => {
-    const gap: number = 16;
-    const imgWidth: number = 157;
     const currentIndex: number = currentImg < 2 ? 2 : currentImg;
     setCurrentImg(index);
     if (index > currentImg) {
@@ -59,13 +59,17 @@ export default function ImgSlider() {
   const sliderHandler = (type: string): void => {
     if (type === "back") {
       setCurrentImg((prev) => (prev <= 0 ? prev : prev - 1));
-      if (currentImg + 5 < images.length) {
-        setTransformValue((prev) => prev - 128 - 16);
+      if (currentImg <= images.length - 3) {
+        setTransformValue((prev) =>
+          currentImg < 3 ? 0 : prev - imgWidth - gap
+        );
       }
     } else if (type === "forward") {
       setCurrentImg((prev) => (prev < images.length - 1 ? prev + 1 : prev));
-      if (currentImg + 6 < images.length) {
-        setTransformValue(128 * (currentImg + 1) + (currentImg + 1) * 16);
+      if (currentImg >= 2 && currentImg < images.length - 3) {
+        setTransformValue((prev) =>
+          currentImg < 3 ? imgWidth + gap : prev + imgWidth + gap
+        );
       }
     }
   };
