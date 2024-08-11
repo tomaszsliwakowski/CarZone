@@ -1,7 +1,7 @@
 import ImgSlider from "./mainView/imgSlider";
 import MainInfo from "./mainView/mainInfo";
-import OfferDesc from "./offerInfoView/offerDesc";
-import OfferInfo from "./offerInfoView/offerInfo";
+import OfferDesc from "./offerDetailsView/offerDesc";
+import OfferDetails from "./offerDetailsView/offerDetails";
 import "./singleOffer.scss";
 
 export default function SingleOffer() {
@@ -13,7 +13,7 @@ export default function SingleOffer() {
           <MainInfo />
         </div>
         <div className="offerInfoView">
-          <OfferInfo />
+          <OfferDetails />
           <OfferDesc />
         </div>
       </div>

@@ -122,8 +122,8 @@ export default function Filters() {
         />
         <FiltrWithOptionsList
           list={gearList}
-          name="Gear type"
-          queryName="gear"
+          name="Transmission"
+          queryName="transmission"
           handleChange={handleChange}
           searchParams={searchParams}
         />

@@ -4,9 +4,9 @@
   display: flex;
   justify-content: space-between;
   gap: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid silver;
-  margin-bottom: 2rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--inActive-color);
+  margin-bottom: 1rem;
   .images {
     display: flex;
     flex-direction: column;
@@ -225,7 +225,7 @@
     flex-direction: column;
     justify-content: space-between;
     .sellerInfo {
-      border-bottom: 1px solid silver;
+      border-bottom: 1px solid var(--inActive-color);
       padding-bottom: 1rem;
       ul {
         list-style: none;
@@ -249,7 +249,7 @@
       }
     }
     .createdInfo {
-      padding: 2.4rem 0 0 0;
+      padding: 1.4rem 0 0 0;
       display: flex;
       position: relative;
       .box {
@@ -271,7 +271,7 @@
         align-items: center;
         position: absolute;
         right: 0;
-        top: 30%;
+        top: 40%;
         cursor: pointer;
         svg {
           font-size: 40px;
