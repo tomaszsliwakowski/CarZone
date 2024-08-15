@@ -19,8 +19,33 @@ export default function AuthFormBody({
   errors,
 }: PROPS) {
   const [visible, setVisible] = useState<boolean>(false);
+
   return (
     <div className="authForm__body">
+      {form.username !== undefined ? (
+        <div className="authForm__container">
+          <label>Username</label>
+          <div className="authForm__inputContainer">
+            <input
+              name="username"
+              type="text"
+              className={errors.username.error ? "error" : ""}
+              size={50}
+              value={form.username}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onUpdateField(e)
+              }
+              onBlur={(e: React.FocusEvent<HTMLInputElement>) => onBlurField(e)}
+            />
+            <div className="icons">
+              {errors.username.error ? (
+                <FiAlertCircle className="alert" />
+              ) : null}
+            </div>
+          </div>
+          <span className="error">{errors.username.message}</span>
+        </div>
+      ) : null}
       <div className="authForm__container">
         <label>E-mail</label>
         <div className="authForm__inputContainer">

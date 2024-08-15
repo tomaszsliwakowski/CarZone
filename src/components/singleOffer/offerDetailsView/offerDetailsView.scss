@@ -60,4 +60,9 @@
     font-size: 18px;
     letter-spacing: 0.5px;
   }
+  .offer__desc__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
 }

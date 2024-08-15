@@ -1,6 +1,5 @@
 import "./auth.scss";
 import { FaFacebook } from "react-icons/fa";
-import { FaApple } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 
 export default function AuthOptions() {
@@ -14,10 +13,6 @@ export default function AuthOptions() {
         <li>
           <FaGoogle />
           <p>Continue via Google</p>
-        </li>
-        <li>
-          <FaApple />
-          <p>Continue via Apple</p>
         </li>
       </ul>
       <div className="auth__other">

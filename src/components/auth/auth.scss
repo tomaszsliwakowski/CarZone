@@ -60,7 +60,7 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 1.5rem 0;
+      padding: 2rem 0;
       position: relative;
       p {
         color: white;
@@ -111,11 +111,24 @@
           }
         }
       }
+
+      .loginForm {
+        padding: 3rem 0 1rem 0;
+        .authForm__body {
+          gap: 2rem;
+        }
+      }
+      .registerForm {
+        padding: 1rem 0 1rem 0;
+        .authForm__body {
+          gap: 1rem;
+        }
+      }
+
       .loginForm,
       .registerForm {
         width: 100%;
         height: auto;
-        padding: 2rem 0;
         display: flex;
         flex-direction: column;
         gap: 0rem;
@@ -123,7 +136,6 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 2rem;
           margin-bottom: 2rem;
           .authForm__container {
             width: 100%;
@@ -133,6 +145,9 @@
             .error {
               color: red;
               padding: 2px 0;
+              &::first-letter {
+                text-transform: uppercase;
+              }
             }
             label {
               font-size: 16px;
@@ -192,6 +207,7 @@
         .login__action,
         .register__action {
           margin-top: 2rem;
+
           button {
             width: 100%;
             height: 48px;
@@ -226,7 +242,6 @@
         .statute {
           width: 100%;
           display: flex;
-
           .statute__checkbox {
             background-color: transparent;
             border: 1px solid var(--blue-color);

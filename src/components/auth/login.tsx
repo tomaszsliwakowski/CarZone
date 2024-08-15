@@ -11,7 +11,8 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const { errors, validateForm, onBlurField } = useAuthFormValidator(form);
+  const { errors, validateForm, onBlurField, onSubmitEmptyValidate } =
+    useAuthFormValidator(form);
 
   const onUpdateField = (e: ChangeEvent<HTMLInputElement>) => {
     const field = e.target.name;
@@ -22,12 +23,8 @@ export default function Login() {
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (form.email === "") {
-      validateForm({ form, field: "email" });
-    }
-    if (form.password === "") {
-      validateForm({ form, field: "password" });
-    }
+    const error: boolean = onSubmitEmptyValidate(form);
+    if (error) return;
   };
   return (
     <form className="loginForm" onSubmit={onSubmitForm}>

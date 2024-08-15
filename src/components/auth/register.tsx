@@ -9,6 +9,7 @@ import StatuteCheckbox from "./statute";
 
 export default function Register() {
   const [form, setForm] = useState<AuthFormType>({
+    username: "",
     email: "",
     password: "",
   });
@@ -19,7 +20,8 @@ export default function Register() {
     setChecked((prev) => !prev);
     if (checkedError && !checked) setCheckedError(false);
   };
-  const { errors, validateForm, onBlurField } = useAuthFormValidator(form);
+  const { errors, validateForm, onBlurField, onSubmitEmptyValidate } =
+    useAuthFormValidator(form);
 
   const onUpdateField = (e: React.ChangeEvent<HTMLInputElement>) => {
     const field = e.target.name;
@@ -32,13 +34,10 @@ export default function Register() {
     e.preventDefault();
     if (!checked) {
       setCheckedError(true);
+      return;
     }
-    if (form.email === "") {
-      validateForm({ form, field: "email" });
-    }
-    if (form.password === "") {
-      validateForm({ form, field: "password" });
-    }
+    const error: boolean = onSubmitEmptyValidate(form);
+    if (error) return;
   };
   return (
     <form className="registerForm" onSubmit={onSubmitForm}>
