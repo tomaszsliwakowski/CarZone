@@ -1,5 +1,7 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import apiRequest from "../utils/apiRequest";
+import { apiRequest } from "../services/apiRequest";
+import { AxiosResponse } from "axios";
+import { UsersServices } from "../services/user.service";
 
 export type UserType = {
   id: string;
@@ -21,10 +23,10 @@ export const AuthContext = createContext<UserAuth>({
 });
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [currentUser, setCurrentUser] = useState<UserType | null>(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const updateUser = (data: UserType | null) => {
+  const updateUser = (data: any) => {
     setCurrentUser(data);
   };
 
@@ -33,15 +35,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   };
   useEffect(() => {
     const request = async () => {
-      await apiRequest
-        .get("")
-        .then((res) => {
-          // updateUser(res.data);
-          //  updateLoading(false);
-        })
-        .catch(() => {
-          //updateLosding(false);
-        });
+      const checkLoggedRes = await UsersServices.checkLogged().then(() => {
+        setIsLoading(false);
+      });
     };
     request();
   }, []);
