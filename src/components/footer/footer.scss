@@ -11,9 +11,13 @@ footer {
     padding: 2rem 0rem 0.25rem 0rem;
     display: flex;
     flex-direction: column;
+    @include xmd {
+      padding: 2rem 2rem 0.25rem 2rem;
+    }
     @include sm {
       padding: 2rem 1rem 2rem 1rem;
     }
+
     div:nth-child(1) {
       padding: 0 0 2rem 0;
       display: flex;

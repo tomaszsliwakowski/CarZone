@@ -95,11 +95,8 @@ export default function ImgSlider() {
         </div>
       </div>
       <div className="slider">
-        <div
-          className={`arrow back ${currentImg === 0 ? "off" : ""}`}
-          onClick={() => sliderHandler("back")}
-        >
-          <IoIosArrowBack />
+        <div className={`arrow back ${currentImg === 0 ? "off" : ""}`}>
+          <IoIosArrowBack onClick={() => sliderHandler("back")} />
         </div>
         <div
           className="currentImage"
@@ -111,9 +108,8 @@ export default function ImgSlider() {
           className={`arrow forward ${
             currentImg === images.length - 1 ? "off" : ""
           }`}
-          onClick={() => sliderHandler("forward")}
         >
-          <IoIosArrowForward />
+          <IoIosArrowForward onClick={() => sliderHandler("forward")} />
         </div>
         <span
           className="fullScreen__icon"
