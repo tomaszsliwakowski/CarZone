@@ -5,12 +5,16 @@ import {
   AuthFormType,
   useAuthFormValidator,
 } from "../../hooks/useAuthFormValidator";
+import { UsersServices } from "../../services/user.service";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const [form, setForm] = useState<AuthFormType>({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const { errors, validateForm, onBlurField, onSubmitEmptyValidate } =
     useAuthFormValidator(form);
 
@@ -21,10 +25,18 @@ export default function Login() {
     validateForm({ form: newForm, field });
   };
 
-  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const error: boolean = onSubmitEmptyValidate(form);
     if (error) return;
+    const loginRes = await UsersServices.login(form);
+    console.log(loginRes);
+    if (loginRes.success) {
+      navigate("/");
+      toast.success(loginRes.message);
+    } else {
+      toast.error(loginRes.message);
+    }
   };
   return (
     <form className="loginForm" onSubmit={onSubmitForm}>

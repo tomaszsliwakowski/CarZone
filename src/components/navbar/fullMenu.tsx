@@ -8,8 +8,8 @@ export default function FullMenu() {
       <Link to={"/sell"}>
         <FaPlus /> Start Selling
       </Link>
-      <Link to={"/login"}>Login</Link>
-      <Link to={"/register"}>Register</Link>
+      <Link to={"/auth?type=login"}>Login</Link>
+      <Link to={"/auth?type=register"}>Register</Link>
     </div>
   );
 }

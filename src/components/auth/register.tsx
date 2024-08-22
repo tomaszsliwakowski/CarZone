@@ -6,6 +6,9 @@ import {
   useAuthFormValidator,
 } from "../../hooks/useAuthFormValidator";
 import StatuteCheckbox from "./statute";
+import { UsersServices } from "../../services/user.service";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Register() {
   const [form, setForm] = useState<AuthFormType>({
@@ -15,6 +18,7 @@ export default function Register() {
   });
   const [checked, setChecked] = useState<boolean>(false);
   const [checkedError, setCheckedError] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const checkHandler = () => {
     setChecked((prev) => !prev);
@@ -30,7 +34,7 @@ export default function Register() {
     validateForm({ form: newForm, field });
   };
 
-  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!checked) {
       setCheckedError(true);
@@ -38,6 +42,13 @@ export default function Register() {
     }
     const error: boolean = onSubmitEmptyValidate(form);
     if (error) return;
+    const registerRes = await UsersServices.register(form);
+    if (registerRes.success) {
+      navigate("/auth?type=login");
+      toast.success(registerRes.message);
+    } else {
+      toast.error(registerRes.message);
+    }
   };
   return (
     <form className="registerForm" onSubmit={onSubmitForm}>

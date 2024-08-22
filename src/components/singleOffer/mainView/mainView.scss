@@ -261,6 +261,9 @@
           @include sm {
             font-size: 24px;
           }
+          @include xsm {
+            display: none;
+          }
         }
       }
       .numberOfPhotos {
