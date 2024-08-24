@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import "./auth.scss";
 import AuthFormBody from "./authFormBody";
 import {
@@ -8,12 +8,15 @@ import {
 import { UsersServices } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { AxiosError, AxiosResponse } from "axios";
+import { AuthContext } from "../../context/authContext";
 
 export default function Login() {
   const [form, setForm] = useState<AuthFormType>({
     email: "",
     password: "",
   });
+  const { updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const { errors, validateForm, onBlurField, onSubmitEmptyValidate } =
     useAuthFormValidator(form);
@@ -29,14 +32,20 @@ export default function Login() {
     e.preventDefault();
     const error: boolean = onSubmitEmptyValidate(form);
     if (error) return;
-    const loginRes = await UsersServices.login(form);
-    console.log(loginRes);
-    if (loginRes.success) {
-      navigate("/");
-      toast.success(loginRes.message);
-    } else {
-      toast.error(loginRes.message);
-    }
+    await UsersServices.login(form)
+      .then((res: AxiosResponse) => {
+        if (res.status === 200) {
+          const response = res.data;
+          updateUser();
+          navigate("/");
+          toast.success(response.message);
+        }
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+        const response: any = err.response?.data;
+        toast.error(response.message || response);
+      });
   };
   return (
     <form className="loginForm" onSubmit={onSubmitForm}>

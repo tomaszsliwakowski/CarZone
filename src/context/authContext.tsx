@@ -1,49 +1,66 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { apiRequest } from "../services/apiRequest";
-import { AxiosResponse } from "axios";
 import { UsersServices } from "../services/user.service";
+import { AxiosResponse } from "axios";
 
 export type UserType = {
   id: string;
   email: string;
   username: string;
-  createdAt: Date;
+  createdDate: Date;
+  isAdmin: boolean;
 };
 
 export type UserAuth = {
   currentUser: UserType | null;
-  updateUser: Function;
   isLoading: boolean;
+  updateUser: Function;
 };
 
 export const AuthContext = createContext<UserAuth>({
   currentUser: null,
-  updateUser: () => {},
   isLoading: true,
+  updateUser: () => {},
 });
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<UserType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const updateUser = (data: any) => {
-    setCurrentUser(data);
+  const request = async () => {
+    await UsersServices.checkLogged().then((res: AxiosResponse) => {
+      const response = res.data;
+      const user = response.user;
+      if (user) {
+        userHandler({
+          id: user.id,
+          email: user.email,
+          username: user.userName,
+          createdDate: user.createdDate,
+          isAdmin: user.isAdmin,
+        });
+        updateLoading(false);
+      }
+    });
   };
 
   const updateLoading = (action: boolean) => {
     setIsLoading(action);
   };
+
+  const userHandler = (user: UserType) => {
+    setCurrentUser(user);
+  };
+
+  const updateUser = () => {
+    request();
+  };
+
   useEffect(() => {
-    const request = async () => {
-      const checkLoggedRes = await UsersServices.checkLogged().then(() => {
-        setIsLoading(false);
-      });
-    };
     request();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, updateUser, isLoading }}>
+    <AuthContext.Provider value={{ currentUser, isLoading, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

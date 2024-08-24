@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./auth.scss";
 import AuthFormBody from "./authFormBody";
 import {
@@ -9,6 +9,14 @@ import StatuteCheckbox from "./statute";
 import { UsersServices } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { AxiosError, AxiosResponse } from "axios";
+import { AuthContext } from "../../context/authContext";
+
+export type ErrorDataType = { code: string; description: string };
+export type ResponseErrorsType = {
+  errors: Array<ErrorDataType>;
+  succeeded: boolean;
+};
 
 export default function Register() {
   const [form, setForm] = useState<AuthFormType>({
@@ -18,6 +26,7 @@ export default function Register() {
   });
   const [checked, setChecked] = useState<boolean>(false);
   const [checkedError, setCheckedError] = useState<boolean>(false);
+  const { updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const checkHandler = () => {
@@ -42,13 +51,22 @@ export default function Register() {
     }
     const error: boolean = onSubmitEmptyValidate(form);
     if (error) return;
-    const registerRes = await UsersServices.register(form);
-    if (registerRes.success) {
-      navigate("/auth?type=login");
-      toast.success(registerRes.message);
-    } else {
-      toast.error(registerRes.message);
-    }
+    await UsersServices.register(form)
+      .then((res: AxiosResponse) => {
+        if (res.status === 200) {
+          const response = res.data;
+          updateUser();
+          navigate("/");
+          toast.success(response.message);
+        }
+      })
+      .catch((err: AxiosError) => {
+        const response = err.response?.data as ResponseErrorsType;
+        const messages = response.errors.map(
+          (item: ErrorDataType) => item.description
+        );
+        toast.error(messages.toString());
+      });
   };
   return (
     <form className="registerForm" onSubmit={onSubmitForm}>
