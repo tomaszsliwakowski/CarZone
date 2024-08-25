@@ -1,15 +1,38 @@
 import { Link } from "react-router-dom";
 import "./navbar.scss";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaUser } from "react-icons/fa";
+import { UserType } from "../../context/authContext";
 
-export default function FullMenu() {
+type PROPS = {
+  currentUser: UserType | null;
+  logout: Function;
+};
+
+export default function FullMenu({ currentUser, logout }: PROPS) {
   return (
     <div className="fullMenu">
+      {currentUser ? (
+        <>
+          <div className="user">
+            <FaUser />
+            <p className="userName">
+              {currentUser.username || currentUser.email || "User"}
+            </p>
+          </div>
+          <button onClick={() => logout()} className="logout">
+            Logout
+          </button>
+        </>
+      ) : null}
       <Link to={"/sell"}>
         <FaPlus /> Start Selling
       </Link>
-      <Link to={"/auth?type=login"}>Login</Link>
-      <Link to={"/auth?type=register"}>Register</Link>
+      {!currentUser ? (
+        <>
+          <Link to={"/auth?type=login"}>Login</Link>
+          <Link to={"/auth?type=register"}>Register</Link>
+        </>
+      ) : null}
     </div>
   );
 }

@@ -15,4 +15,8 @@ export const UsersServices = {
     const loginRes = await apiRequest.post("/login", user);
     return loginRes;
   },
+  logout: async (): Promise<AxiosResponse> => {
+    const logoutRes = await apiRequest.get("/logout");
+    return logoutRes;
+  },
 };

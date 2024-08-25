@@ -42,7 +42,6 @@ export default function Login() {
         }
       })
       .catch((err: AxiosError) => {
-        console.log(err);
         const response: any = err.response?.data;
         toast.error(response.message || response);
       });

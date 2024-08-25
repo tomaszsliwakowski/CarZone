@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { UsersServices } from "../services/user.service";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 export type UserType = {
   id: string;
@@ -27,27 +27,33 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const request = async () => {
-    await UsersServices.checkLogged().then((res: AxiosResponse) => {
-      const response = res.data;
-      const user = response.user;
-      if (user) {
-        userHandler({
-          id: user.id,
-          email: user.email,
-          username: user.userName,
-          createdDate: user.createdDate,
-          isAdmin: user.isAdmin,
-        });
-        updateLoading(false);
-      }
-    });
+    await UsersServices.checkLogged()
+      .then((res: AxiosResponse) => {
+        const response = res.data;
+        const user = response.user;
+        if (user) {
+          userHandler({
+            id: user.id,
+            email: user.email,
+            username: user.userName,
+            createdDate: user.createdDate,
+            isAdmin: user.isAdmin,
+          });
+          updateLoading(false);
+        }
+      })
+      .catch(() => {
+        if (currentUser !== null) {
+          userHandler(null);
+        }
+      });
   };
 
   const updateLoading = (action: boolean) => {
     setIsLoading(action);
   };
 
-  const userHandler = (user: UserType) => {
+  const userHandler = (user: UserType | null) => {
     setCurrentUser(user);
   };
 

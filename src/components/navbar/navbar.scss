@@ -65,6 +65,29 @@
           font-size: 20px;
         }
       }
+      .logout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: white;
+        width: 120px;
+        max-width: 160px;
+        height: 40px;
+        background-color: #005aa5;
+        font-size: 16px;
+        border-radius: 0.25rem;
+        transition: all 0.3s;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        &:hover {
+          background-color: darken(#005aa5, 10%);
+        }
+        svg {
+          font-size: 20px;
+        }
+      }
     }
     .sell {
       width: 200px;
@@ -140,6 +163,51 @@
       font-size: 16px;
       border-radius: 0.25rem;
       transition: all 0.3s;
+      &:hover {
+        background-color: darken(#005aa5, 10%);
+      }
+      svg {
+        font-size: 20px;
+      }
+    }
+    .user {
+      display: flex;
+      min-width: 250px;
+      max-width: 90%;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      color: white;
+      height: 60px;
+      border: 1px solid white;
+      align-items: center;
+      border-radius: 5px;
+      overflow: hidden;
+      svg {
+        font-size: 24px;
+      }
+      .userName {
+        font-size: 16px;
+        color: white;
+        max-width: 80%;
+        overflow: hidden;
+      }
+    }
+    .logout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: white;
+      width: 100%;
+      max-width: 240px;
+      height: 60px;
+      background-color: #005aa5;
+      font-size: 16px;
+      border-radius: 0.25rem;
+      transition: all 0.3s;
+      outline: none;
+      border: none;
       &:hover {
         background-color: darken(#005aa5, 10%);
       }

@@ -8,21 +8,28 @@ type PROPS = {
   menuOpen: boolean;
   switchMenuHandler: Function;
   currentUser: UserType | null;
+  logout: Function;
 };
 
 export default function Menu({
   menuOpen,
   switchMenuHandler,
   currentUser,
+  logout,
 }: PROPS) {
   return (
     <div className="right">
       <div className="user">
         <FaUser />
         {currentUser ? (
-          <div className="userName">
-            {currentUser.username || currentUser.email || "User"}
-          </div>
+          <>
+            <p className="userName">
+              {currentUser.username || currentUser.email || "User"}
+            </p>
+            <button onClick={() => logout()} className="logout">
+              Logout
+            </button>
+          </>
         ) : (
           <div className="userAuth">
             <Link to={"/auth?type=login"}>Login</Link>
