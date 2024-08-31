@@ -20,22 +20,27 @@ export default function Menu({
   return (
     <div className="right">
       <div className="user">
-        <FaUser />
         {currentUser ? (
           <>
-            <p className="userName">
-              {currentUser.username || currentUser.email || "User"}
-            </p>
+            <Link to={"/profile"} className="logged">
+              <FaUser />
+              <p className="userName">
+                {currentUser.username || currentUser.email || "User"}
+              </p>
+            </Link>
             <button onClick={() => logout()} className="logout">
               Logout
             </button>
           </>
         ) : (
-          <div className="userAuth">
-            <Link to={"/auth?type=login"}>Login</Link>
-            <span>|</span>
-            <Link to={"/auth?type=register"}>Register</Link>
-          </div>
+          <>
+            <FaUser />
+            <div className="userAuth">
+              <Link to={"/auth?type=login"}>Login</Link>
+              <span>|</span>
+              <Link to={"/auth?type=register"}>Register</Link>
+            </div>
+          </>
         )}
       </div>
       <div className="sell">

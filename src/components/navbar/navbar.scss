@@ -36,12 +36,27 @@
       color: white;
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 2rem;
       border-right: 1px solid white;
       padding-right: 2rem;
       height: 65%;
       @include sm {
         display: none;
+      }
+      & a.logged {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        height: 100%;
+        transition: all 0.3s;
+        border-color: var(--first-bg-color);
+        &:hover {
+          border-style: solid;
+          border-width: 1px;
+          border-bottom-color: white;
+          border-left: none;
+          border-right: none;
+        }
       }
       svg {
         font-size: 25px;

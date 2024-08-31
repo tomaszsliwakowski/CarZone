@@ -1,3 +1,11 @@
+import Footer from "../../components/footer/footer";
+import ProfileBody from "../../components/profile/profileBody";
+
 export default function ProfilePage() {
-  return <div>profilePage</div>;
+  return (
+    <>
+      <ProfileBody />
+      <Footer />
+    </>
+  );
 }

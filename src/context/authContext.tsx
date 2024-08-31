@@ -42,13 +42,13 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
           updateLoading(false);
         }
       })
-      .catch(() => {
-        if (currentUser !== null) {
+      .catch((res: AxiosError) => {
+        const response = res.response;
+        if (currentUser !== null && response?.statusText === "Unauthorized") {
           userHandler(null);
         }
       });
   };
-
   const updateLoading = (action: boolean) => {
     setIsLoading(action);
   };
