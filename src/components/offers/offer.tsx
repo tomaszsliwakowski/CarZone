@@ -7,6 +7,7 @@ import { RiCalendarEventLine } from "react-icons/ri";
 import { FiMapPin } from "react-icons/fi";
 import "./offers.scss";
 import { format } from "timeago.js";
+import OfferInfoPanel from "./offerInfoPanel";
 
 type PROPS = {
   offer: OfferType;
@@ -28,24 +29,7 @@ export default function Offer({ offer }: PROPS) {
               &nbsp;&bull;&nbsp;{offer.shortText}
             </p>
           </div>
-          <div className="offer__carInfo">
-            <span>
-              <TbRoad />
-              {offer.mileage + " km"}
-            </span>
-            <span>
-              <BsFuelPump />
-              {offer.fuelType}
-            </span>
-            <span>
-              <TbManualGearboxFilled />
-              {offer.gear}
-            </span>
-            <span>
-              <RiCalendarEventLine />
-              {offer.productionYear}
-            </span>
-          </div>
+          <OfferInfoPanel offer={offer} />
         </div>
         <div className="offer__otherInfo">
           <span>
