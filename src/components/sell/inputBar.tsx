@@ -1,28 +1,26 @@
+import "./sell.scss";
 import { useState } from "react";
-import "./filtr.scss";
 import { useClickOutSide } from "../../hooks/useClickOutSide";
 
 type PROPS = {
   list: string[];
   name: string;
   standard?: string;
-  queryName: string;
   handleChange: Function;
-  searchParams?: URLSearchParams;
+  value: string;
+  status?: boolean;
 };
 
-export default function FiltrWithList({
+export default function InputBar({
   list,
   name,
   standard,
-  queryName,
   handleChange,
-  searchParams,
+  value,
+  status = true,
 }: PROPS) {
   const [state, setState] = useState(false);
-  const [selected, setSelected] = useState<string>(
-    searchParams?.get(queryName) || ""
-  );
+  const [selected, setSelected] = useState<string>(value || "");
   const [filtrValue, setFiltrValue] = useState("");
 
   const ref = useClickOutSide(() => {
@@ -30,7 +28,6 @@ export default function FiltrWithList({
   });
 
   const selectHandler = async (el: string) => {
-    await handleChange(queryName, el);
     setSelected(el);
     setState(false);
     setFiltrValue("");
@@ -43,17 +40,16 @@ export default function FiltrWithList({
 
   const removeSelected = async () => {
     setSelected("");
-    await handleChange(queryName, "");
   };
-
   return (
-    <div className="filtr" ref={ref}>
-      <div className="filtrInput">
+    <div className="sell__inputBar" ref={ref}>
+      <div className={`inputBar ${!status ? "off" : ""}`}>
         <input
           type="text"
           name={name}
           placeholder={name}
           value={selected}
+          disabled={!status}
           onChange={inputHandler}
           onClick={() => setState((prev) => !prev)}
         />
@@ -62,7 +58,7 @@ export default function FiltrWithList({
         ) : null}
       </div>
       {state ? (
-        <ul className="filtrList">
+        <ul className="select__List">
           {list
             .filter((item) =>
               item.toLowerCase().includes(filtrValue.toLowerCase())

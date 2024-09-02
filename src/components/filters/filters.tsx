@@ -1,3 +1,4 @@
+import { memo, useEffect } from "react";
 import { useFilterParams } from "../../hooks/useFilterParams";
 import {
   bodyTypeList,
@@ -19,6 +20,7 @@ export default function Filters() {
   const { handleChange, searchParams } = useFilterParams();
   const brand = searchParams.get("brand");
   const modelsList = carModels.find((item) => item.brand === brand)?.models;
+
   return (
     <div className="filtersBar">
       <div className="body">
@@ -30,7 +32,7 @@ export default function Filters() {
           searchParams={searchParams}
         />
         <FiltrWithOptionsList
-          list={carModels.find((item) => item.brand === brand)?.models || []}
+          list={modelsList || []}
           name="Models"
           queryName="models"
           handleChange={handleChange}

@@ -49,7 +49,17 @@ export default function FiltrWithOptionsList({
   useEffect(() => {
     if (state) return;
     handleChange(queryName, selected.toString());
+    if (name === "Brand" && selected.length > 1) {
+      handleChange("models", "");
+    }
   }, [state]);
+
+  useEffect(() => {
+    if (name === "Models") {
+      setSelected([]);
+      setFiltrValue("");
+    }
+  }, [status]);
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFiltrValue(e.target.value);
