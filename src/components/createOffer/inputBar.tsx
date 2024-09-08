@@ -1,10 +1,11 @@
-import "./sell.scss";
-import { useState } from "react";
+import "./createOffer.scss";
+import { useEffect, useState } from "react";
 import { useClickOutSide } from "../../hooks/useClickOutSide";
 
 type PROPS = {
   list: string[];
   name: string;
+  placeholder: string;
   standard?: string;
   handleChange: Function;
   value: string;
@@ -14,6 +15,7 @@ type PROPS = {
 export default function InputBar({
   list,
   name,
+  placeholder,
   standard,
   handleChange,
   value,
@@ -28,6 +30,7 @@ export default function InputBar({
   });
 
   const selectHandler = async (el: string) => {
+    handleChange(name, el);
     setSelected(el);
     setState(false);
     setFiltrValue("");
@@ -39,15 +42,24 @@ export default function InputBar({
   };
 
   const removeSelected = async () => {
+    handleChange(name, "");
     setSelected("");
   };
+
+  useEffect(() => {
+    if (name === "model") {
+      setSelected("");
+      setFiltrValue("");
+    }
+  }, [status]);
+
   return (
-    <div className="sell__inputBar" ref={ref}>
+    <div className="createOffer__inputBar" ref={ref}>
       <div className={`inputBar ${!status ? "off" : ""}`}>
         <input
           type="text"
           name={name}
-          placeholder={name}
+          placeholder={placeholder}
           value={selected}
           disabled={!status}
           onChange={inputHandler}

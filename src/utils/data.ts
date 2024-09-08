@@ -449,6 +449,7 @@ export const carModels: ModelsType[] = [
     brand: "Nissan",
     models: ["All", "370Z", "Almera", "GT-R", "Qashqai", "X-Trail", "Other"],
   },
+  { brand: "Other", models: [] },
 ];
 
 export const fuelList: string[] = [

@@ -12,96 +12,108 @@ import {
   yearList,
 } from "../../utils/data";
 import InputBar from "./inputBar";
-import "./sell.scss";
+import "./createOffer.scss";
+import {
+  OfferForm,
+  useCreateOfferFormStore,
+} from "../../context/createOfferStore";
 
-export default function SellForm() {
-  const [form, setForm] = useState({
-    brand: "",
-    model: "",
-    body: "",
-    price: "",
-    yearOfPruduction: "",
-    fuel: "",
-    mileage: "",
-    condition: "",
-    power: "",
-    transmission: "",
-    drive: "",
-  });
+export default function CreateOfferForm() {
+  const { form, setFormValue } = useCreateOfferFormStore((state) => ({
+    form: state.form,
+    setFormValue: state.setFormValue,
+  }));
 
-  const handleChange = () => {};
+  const handleChange = (element: keyof OfferForm, value: string) => {
+    setFormValue(element, value);
+  };
+
   const modelsList = carModels.find(
     (item) => item.brand === form.brand
   )?.models;
+
   return (
-    <div className="sell__form">
-      <div className="sell__form__container">
+    <div className="createOffer__form">
+      <div className="createOffer__form__container">
         <form>
           <InputBar
-            list={carModels.map((item) => item.brand)}
-            name="Brand"
+            list={carModels
+              .filter((item) => item.brand !== "All")
+              .map((item) => item.brand)}
+            placeholder="Brand"
+            name="brand"
             handleChange={handleChange}
-            value=""
+            value={form.brand}
           />
           <InputBar
-            list={modelsList || []}
-            name="Models"
+            list={modelsList?.filter((item) => item !== "All") || []}
+            placeholder="Models"
+            name="model"
             handleChange={handleChange}
-            value=""
-            status={modelsList ? true : false}
+            value={form.model}
+            status={modelsList && modelsList?.length > 0 ? true : false}
           />
           <InputBar
             list={bodyTypeList}
-            name="Body Type"
+            placeholder="Body Type"
+            name="body"
             handleChange={handleChange}
-            value=""
+            value={form.body}
           />
           <InputBar
             list={priceList}
-            name="Price"
+            placeholder="Price"
+            name="price"
             standard="PLN"
             handleChange={handleChange}
             value=""
           />
           <InputBar
             list={[...yearList].reverse()}
-            name="Year of production"
+            placeholder="Year of production"
+            name="yearOfPruduction"
             handleChange={handleChange}
             value=""
           />
           <InputBar
             list={fuelList}
-            name="Fuel Type"
+            placeholder="Fuel Type"
+            name="fuel"
             handleChange={handleChange}
             value=""
           />
           <InputBar
             list={mileageList}
-            name="Mileage"
+            placeholder="Mileage"
             handleChange={handleChange}
+            name="mileage"
             value=""
           />
           <InputBar
             list={conditionDamagedList}
-            name="Condition Damage"
+            placeholder="Condition Damage"
+            name="condition"
             handleChange={handleChange}
             value=""
           />
           <InputBar
             list={powerList}
-            name="Power"
+            placeholder="Power"
+            name="power"
             handleChange={handleChange}
             value=""
           />
           <InputBar
             list={gearList}
-            name="Transmission"
+            placeholder="Transmission"
+            name="transmission"
             handleChange={handleChange}
             value=""
           />
           <InputBar
             list={driveList}
-            name="Drive type"
+            placeholder="Drive type"
+            name="drive"
             handleChange={handleChange}
             value=""
           />

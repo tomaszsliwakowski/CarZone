@@ -44,7 +44,7 @@ export default function Menu({
         )}
       </div>
       <div className="sell">
-        <Link to={"/sell"}>
+        <Link to={"/create-offer"}>
           <FaPlus /> Start Selling
         </Link>
       </div>

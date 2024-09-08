@@ -24,7 +24,7 @@ export default function FullMenu({ currentUser, logout }: PROPS) {
           </button>
         </>
       ) : null}
-      <Link to={"/sell"}>
+      <Link to={"/create-offer"}>
         <FaPlus /> Start Selling
       </Link>
       {!currentUser ? (

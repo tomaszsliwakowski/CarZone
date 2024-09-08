@@ -37,7 +37,7 @@ export default function Filters() {
           queryName="models"
           handleChange={handleChange}
           searchParams={searchParams}
-          status={modelsList ? true : false}
+          status={modelsList && modelsList.length > 0 ? true : false}
         />
         <FiltrWithOptionsList
           list={bodyTypeList}

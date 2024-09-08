@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
 import { OfferType } from "../../utils/offersData";
-import { TbRoad } from "react-icons/tb";
-import { BsFuelPump } from "react-icons/bs";
-import { TbManualGearboxFilled } from "react-icons/tb";
-import { RiCalendarEventLine } from "react-icons/ri";
 import { FiMapPin } from "react-icons/fi";
 import "./offers.scss";
 import { format } from "timeago.js";
