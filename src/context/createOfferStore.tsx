@@ -12,6 +12,8 @@ export type OfferForm = {
   power: string;
   transmission: string;
   drive: string;
+  capasity: string;
+  phone: string;
 };
 
 type OfferStore = {
@@ -32,6 +34,8 @@ export const useCreateOfferFormStore = create<OfferStore>((set) => ({
     power: "",
     transmission: "",
     drive: "",
+    capasity: "",
+    phone: "",
   },
   setFormValue: (element, value) => {
     set((state) => ({ form: { ...state.form, [element]: value } }));

@@ -1,44 +1,33 @@
-import "./createOffer.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useClickOutSide } from "../../hooks/useClickOutSide";
+import "./createOffer.scss";
 
 type PROPS = {
-  list: string[];
+  type: string;
   name: string;
   placeholder: string;
-  standard?: string;
   handleChange: Function;
   value: string;
-  status?: boolean;
 };
 
 export default function InputBar({
-  list,
+  type,
   name,
   placeholder,
-  standard,
   handleChange,
   value,
-  status = true,
 }: PROPS) {
   const [state, setState] = useState(false);
   const [selected, setSelected] = useState<string>(value || "");
-  const [filtrValue, setFiltrValue] = useState("");
-
   const ref = useClickOutSide(() => {
     if (state) setState(false);
+    if (value !== selected) {
+      handleChange(name, selected);
+    }
   });
-
-  const selectHandler = async (el: string) => {
-    handleChange(name, el);
-    setSelected(el);
-    setState(false);
-    setFiltrValue("");
-  };
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelected(e.target.value);
-    setFiltrValue(e.target.value);
   };
 
   const removeSelected = async () => {
@@ -46,22 +35,14 @@ export default function InputBar({
     setSelected("");
   };
 
-  useEffect(() => {
-    if (name === "model") {
-      setSelected("");
-      setFiltrValue("");
-    }
-  }, [status]);
-
   return (
     <div className="createOffer__inputBar" ref={ref}>
-      <div className={`inputBar ${!status ? "off" : ""}`}>
+      <div className={`inputBar`}>
         <input
-          type="text"
+          type={type}
           name={name}
           placeholder={placeholder}
           value={selected}
-          disabled={!status}
           onChange={inputHandler}
           onClick={() => setState((prev) => !prev)}
         />
@@ -69,19 +50,6 @@ export default function InputBar({
           <span onClick={() => removeSelected()}>X</span>
         ) : null}
       </div>
-      {state ? (
-        <ul className="select__List">
-          {list
-            .filter((item) =>
-              item.toLowerCase().includes(filtrValue.toLowerCase())
-            )
-            .map((el, id) => (
-              <li key={id} onClick={() => selectHandler(el)}>
-                {el} {standard}
-              </li>
-            ))}
-        </ul>
-      ) : null}
     </div>
   );
 }

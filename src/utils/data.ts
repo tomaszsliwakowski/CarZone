@@ -575,10 +575,6 @@ export const powerList: string[] = [
 ];
 
 export const capasityList: string[] = [
-  "50",
-  "80",
-  "120",
-  "250",
   "500",
   "600",
   "750",

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   bodyTypeList,
+  capasityList,
   carModels,
   conditionDamagedList,
   driveList,
@@ -11,14 +12,18 @@ import {
   priceList,
   yearList,
 } from "../../utils/data";
-import InputBar from "./inputBar";
+import InputSelectBar from "./inputSelectBar";
 import "./createOffer.scss";
 import {
   OfferForm,
   useCreateOfferFormStore,
 } from "../../context/createOfferStore";
+import InputBar from "./inputBar";
+import { FaUser } from "react-icons/fa";
+import { AuthContext } from "../../context/authContext";
 
 export default function CreateOfferForm() {
+  const { currentUser } = useContext(AuthContext);
   const { form, setFormValue } = useCreateOfferFormStore((state) => ({
     form: state.form,
     setFormValue: state.setFormValue,
@@ -28,15 +33,25 @@ export default function CreateOfferForm() {
     setFormValue(element, value);
   };
 
-  const modelsList = carModels.find(
-    (item) => item.brand === form.brand
-  )?.models;
-
+  const modelsList =
+    carModels.find((item) => item.brand === form.brand)?.models || [];
+  console.log(form);
   return (
     <div className="createOffer__form">
-      <div className="createOffer__form__container">
-        <form>
+      <form>
+        <div className="owner">
+          <FaUser />
+          <span>{currentUser?.username}</span>
           <InputBar
+            type="number"
+            name="phone"
+            placeholder="Phone"
+            value={form.phone}
+            handleChange={handleChange}
+          />
+        </div>
+        <div className="createOffer__form__container">
+          <InputSelectBar
             list={carModels
               .filter((item) => item.brand !== "All")
               .map((item) => item.brand)}
@@ -44,81 +59,100 @@ export default function CreateOfferForm() {
             name="brand"
             handleChange={handleChange}
             value={form.brand}
+            type="text"
           />
-          <InputBar
-            list={modelsList?.filter((item) => item !== "All") || []}
+          <InputSelectBar
+            list={modelsList.filter((item) => item !== "All")}
             placeholder="Models"
             name="model"
             handleChange={handleChange}
             value={form.model}
-            status={modelsList && modelsList?.length > 0 ? true : false}
+            status={modelsList.length > 0 ? true : false}
+            type="text"
           />
-          <InputBar
+          <InputSelectBar
             list={bodyTypeList}
             placeholder="Body Type"
             name="body"
             handleChange={handleChange}
             value={form.body}
+            type="text"
           />
-          <InputBar
+          <InputSelectBar
             list={priceList}
             placeholder="Price"
             name="price"
             standard="PLN"
             handleChange={handleChange}
-            value=""
+            value={form.price}
+            type="number"
           />
-          <InputBar
+          <InputSelectBar
             list={[...yearList].reverse()}
             placeholder="Year of production"
             name="yearOfPruduction"
             handleChange={handleChange}
-            value=""
+            value={form.yearOfPruduction}
+            type="number"
           />
-          <InputBar
+          <InputSelectBar
             list={fuelList}
             placeholder="Fuel Type"
             name="fuel"
             handleChange={handleChange}
-            value=""
+            value={form.fuel}
+            type="text"
           />
-          <InputBar
+          <InputSelectBar
             list={mileageList}
             placeholder="Mileage"
             handleChange={handleChange}
             name="mileage"
-            value=""
+            value={form.mileage}
+            type="number"
           />
-          <InputBar
+          <InputSelectBar
             list={conditionDamagedList}
             placeholder="Condition Damage"
             name="condition"
             handleChange={handleChange}
-            value=""
+            value={form.condition}
+            type="text"
           />
-          <InputBar
+          <InputSelectBar
             list={powerList}
             placeholder="Power"
             name="power"
             handleChange={handleChange}
-            value=""
+            value={form.power}
+            type="number"
           />
-          <InputBar
+          <InputSelectBar
             list={gearList}
             placeholder="Transmission"
             name="transmission"
             handleChange={handleChange}
-            value=""
+            value={form.transmission}
+            type="text"
           />
-          <InputBar
+          <InputSelectBar
             list={driveList}
             placeholder="Drive type"
             name="drive"
             handleChange={handleChange}
-            value=""
+            value={form.drive}
+            type="text"
           />
-        </form>
-      </div>
+          <InputSelectBar
+            list={capasityList}
+            placeholder="Capasity"
+            name="capasity"
+            handleChange={handleChange}
+            value={form.capasity}
+            type="text"
+          />
+        </div>
+      </form>
     </div>
   );
 }
