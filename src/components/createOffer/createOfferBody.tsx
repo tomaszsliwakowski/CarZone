@@ -1,12 +1,12 @@
 import "./createOffer.scss";
-import SellForm from "./createOfferForm";
-import SellHeader from "./createOfferHeader";
+import CreateOfferForm from "./createOfferForm";
+import CreateOfferHeader from "./createOfferHeader";
 
 export default function CreateOfferBody() {
   return (
     <div className="createOffer__body">
-      <SellHeader />
-      <SellForm />
+      <CreateOfferHeader />
+      <CreateOfferForm />
     </div>
   );
 }

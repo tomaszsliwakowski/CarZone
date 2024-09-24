@@ -182,6 +182,57 @@
           }
         }
       }
+      .createOffer__form__desc {
+        width: 100%;
+        padding: 1rem;
+        textarea {
+          background-color: var(--second-bg-color);
+          border: none;
+          outline: none;
+          resize: none;
+          width: 100%;
+          max-width: 850px;
+          min-height: 200px;
+          overflow: auto;
+          padding: 1rem;
+          color: silver;
+          font-size: 18px;
+          border-radius: 5px;
+        }
+      }
+      .createOffer__form__images {
+        padding: 1rem;
+        width: 100%;
+        ul {
+          list-style: none;
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          li {
+            img {
+              width: 100%;
+              max-width: 120px;
+              height: auto;
+              border-radius: 5px;
+            }
+            &.add__button {
+              width: 100%;
+              max-width: 120px;
+              height: auto;
+              background-color: var(--blue-color);
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: white;
+              cursor: pointer;
+              svg {
+                font-size: 30px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

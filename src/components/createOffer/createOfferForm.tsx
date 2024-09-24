@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import {
   bodyTypeList,
   capasityList,
@@ -21,6 +21,7 @@ import {
 import InputBar from "./inputBar";
 import { FaUser } from "react-icons/fa";
 import { AuthContext } from "../../context/authContext";
+import CreateOfferImages from "./createOfferImages";
 
 export default function CreateOfferForm() {
   const { currentUser } = useContext(AuthContext);
@@ -35,7 +36,7 @@ export default function CreateOfferForm() {
 
   const modelsList =
     carModels.find((item) => item.brand === form.brand)?.models || [];
-  console.log(form);
+
   return (
     <div className="createOffer__form">
       <form>
@@ -152,6 +153,10 @@ export default function CreateOfferForm() {
             type="text"
           />
         </div>
+        <div className="createOffer__form__desc">
+          <textarea placeholder="Offer description"></textarea>
+        </div>
+        <CreateOfferImages />
       </form>
     </div>
   );
