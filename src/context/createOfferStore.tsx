@@ -14,11 +14,14 @@ export type OfferForm = {
   drive: string;
   capasity: string;
   phone: string;
+  images: FormData[];
 };
 
 type OfferStore = {
   form: OfferForm;
   setFormValue: (element: keyof OfferForm, value: string) => void;
+  addFormImage: (value: FormData) => void;
+  removeFormImage: (value: number) => void;
 };
 
 export const useCreateOfferFormStore = create<OfferStore>((set) => ({
@@ -36,11 +39,34 @@ export const useCreateOfferFormStore = create<OfferStore>((set) => ({
     drive: "",
     capasity: "",
     phone: "",
+    images: [],
   },
   setFormValue: (element, value) => {
     set((state) => ({ form: { ...state.form, [element]: value } }));
     if (element === "brand" && value === "") {
       set((state) => ({ form: { ...state.form, model: "" } }));
     }
+  },
+  addFormImage: (value) => {
+    set((state) => {
+      let images = state.form.images;
+      if (images.length === 0) {
+        images = [value];
+      } else {
+        images = [...images, value];
+      }
+      return {
+        form: { ...state.form, images: images },
+      };
+    });
+  },
+  removeFormImage: (value) => {
+    set((state) => {
+      let images = state.form.images;
+      images.splice(value, 1);
+      return {
+        form: { ...state.form, images: [...images] },
+      };
+    });
   },
 }));

@@ -25,10 +25,13 @@ import CreateOfferImages from "./createOfferImages";
 
 export default function CreateOfferForm() {
   const { currentUser } = useContext(AuthContext);
-  const { form, setFormValue } = useCreateOfferFormStore((state) => ({
-    form: state.form,
-    setFormValue: state.setFormValue,
-  }));
+  const { form, setFormValue, addFormImage, removeFormImage } =
+    useCreateOfferFormStore((state) => ({
+      form: state.form,
+      setFormValue: state.setFormValue,
+      addFormImage: state.addFormImage,
+      removeFormImage: state.removeFormImage,
+    }));
 
   const handleChange = (element: keyof OfferForm, value: string) => {
     setFormValue(element, value);
@@ -156,7 +159,11 @@ export default function CreateOfferForm() {
         <div className="createOffer__form__desc">
           <textarea placeholder="Offer description"></textarea>
         </div>
-        <CreateOfferImages />
+        <CreateOfferImages
+          addFormImage={addFormImage}
+          removeFormImage={removeFormImage}
+          form={form.images}
+        />
       </form>
     </div>
   );
