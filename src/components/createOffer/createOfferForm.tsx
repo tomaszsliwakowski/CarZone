@@ -22,15 +22,18 @@ import InputBar from "./inputBar";
 import { FaUser } from "react-icons/fa";
 import { AuthContext } from "../../context/authContext";
 import CreateOfferImages from "./createOfferImages";
+import CreateOfferActions from "./createOfferActions";
+import CreateOfferDesc from "./createOfferDesc";
 
 export default function CreateOfferForm() {
   const { currentUser } = useContext(AuthContext);
-  const { form, setFormValue, addFormImage, removeFormImage } =
+  const { form, setFormValue, addFormImage, removeFormImage, clearForm } =
     useCreateOfferFormStore((state) => ({
       form: state.form,
       setFormValue: state.setFormValue,
       addFormImage: state.addFormImage,
       removeFormImage: state.removeFormImage,
+      clearForm: state.clearForm,
     }));
 
   const handleChange = (element: keyof OfferForm, value: string) => {
@@ -40,12 +43,16 @@ export default function CreateOfferForm() {
   const modelsList =
     carModels.find((item) => item.brand === form.brand)?.models || [];
 
+  console.log(form);
   return (
     <div className="createOffer__form">
       <form>
+        <h2 className="title">Form</h2>
         <div className="owner">
-          <FaUser />
-          <span>{currentUser?.username}</span>
+          <div className="user__con">
+            <FaUser />
+            <span>{currentUser?.username}</span>
+          </div>
           <InputBar
             type="number"
             name="phone"
@@ -156,14 +163,13 @@ export default function CreateOfferForm() {
             type="text"
           />
         </div>
-        <div className="createOffer__form__desc">
-          <textarea placeholder="Offer description"></textarea>
-        </div>
+        <CreateOfferDesc setFormValue={setFormValue} />
         <CreateOfferImages
           addFormImage={addFormImage}
           removeFormImage={removeFormImage}
           form={form.images}
         />
+        <CreateOfferActions clearForm={clearForm} />
       </form>
     </div>
   );

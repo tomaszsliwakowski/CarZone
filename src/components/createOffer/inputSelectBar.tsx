@@ -56,7 +56,10 @@ export default function InputSelectBar({
       setSelected("");
       setFiltrValue("");
     }
-  }, [status]);
+    if (value === "") {
+      setSelected("");
+    }
+  }, [status, value]);
 
   return (
     <div className="createOffer__inputBar" ref={ref}>

@@ -16,6 +16,7 @@ export default function CreateOfferImages({
   const [images, setImages] = useState<string[]>([]);
   const inputRef: React.MutableRefObject<HTMLInputElement | null> =
     useRef(null);
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       if (!e.target.files[0]) return;
@@ -29,6 +30,7 @@ export default function CreateOfferImages({
       }
     }
   };
+
   useEffect(() => {
     if (form.length === 0 && images.length > 0) {
       setImages([]);
@@ -51,6 +53,7 @@ export default function CreateOfferImages({
 
   return (
     <div className="createOffer__form__images">
+      <h2>Images</h2>
       <ul>
         <li className="add__button">
           <FaPlus />
@@ -67,7 +70,7 @@ export default function CreateOfferImages({
           <li key={id} className="form__image">
             <img src={item} alt="image" />
             <div
-              className="form__iamge__trash"
+              className="form__image__trash"
               onClick={() => removeFormImage(id)}
             >
               <FaTrash />
@@ -78,29 +81,3 @@ export default function CreateOfferImages({
     </div>
   );
 }
-
-const imagecon = [
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-  "https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IndsOGFtdmw5OHZubjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.0CdCLHA83bESaYjEKMUyiZP4RGecGYU-a1YN_IlNPgw/image;s=1440x0;q=100",
-];

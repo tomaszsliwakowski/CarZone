@@ -1,3 +1,5 @@
+@import "../../responsive.scss";
+
 .createOffer__body {
   width: 100%;
   height: 100%;
@@ -17,11 +19,18 @@
     display: flex;
     justify-content: center;
     border-radius: 1rem 1rem 0 0;
+
+    @include xsm {
+      border-radius: 1rem;
+    }
     .container {
       width: 100%;
       h1 {
         font-size: 32px;
         color: white;
+        @include xsm {
+          font-size: 26px;
+        }
       }
     }
   }
@@ -29,10 +38,16 @@
     background-color: var(--second-bg-color);
     width: 100%;
     max-width: calc(100% - 1rem);
-    padding: 1rem 2rem 2rem 2rem;
+    padding: 0rem 2rem 2rem 2rem;
     border-radius: 0 0 1rem 1rem;
     display: flex;
     justify-content: center;
+
+    @include xsm {
+      padding: 0rem 0rem 1rem 0rem;
+      border-radius: 0rem;
+      background-color: var(--first-bg-color);
+    }
 
     form {
       display: flex;
@@ -45,12 +60,32 @@
       padding: 1rem;
       flex-direction: column;
       gap: 1rem;
+      @include xsm {
+        border-radius: 0rem;
+      }
+      @include sm {
+        padding: 0;
+      }
+      .title {
+        padding: 1rem 1rem 0rem 1rem;
+        color: white;
+        font-size: 24px;
+      }
 
       .owner {
         display: flex;
         align-items: center;
         gap: 1rem;
         padding: 1rem;
+        .user__con {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+        @include xsm {
+          flex-direction: column;
+          align-items: start;
+        }
 
         svg {
           font-size: 30px;
@@ -201,8 +236,16 @@
         }
       }
       .createOffer__form__images {
-        padding: 1rem;
+        padding: 0 1rem 1rem 1rem;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        h2 {
+          color: white;
+          font-size: 24px;
+        }
+
         ul {
           list-style: none;
           display: flex;
@@ -210,12 +253,19 @@
           flex-wrap: wrap;
           li {
             min-height: 95px;
+
+            @include xsm {
+              min-height: 65px;
+            }
             img {
               width: 100%;
               max-width: 120px;
               height: 100%;
               border-radius: 5px;
               object-fit: cover;
+              @include xsm {
+                max-width: 80px;
+              }
             }
             &.add__button {
               width: 100%;
@@ -229,6 +279,9 @@
               color: white;
               cursor: pointer;
               position: relative;
+              @include xsm {
+                max-width: 80px;
+              }
               svg {
                 font-size: 30px;
               }
@@ -244,7 +297,7 @@
             }
             &.form__image {
               position: relative;
-              .form__iamge__trash {
+              .form__image__trash {
                 display: none;
                 position: absolute;
                 top: 0;
@@ -259,11 +312,42 @@
                   font-size: 25px;
                 }
               }
-              &:hover .form__iamge__trash {
+              &:hover .form__image__trash {
                 display: flex;
                 justify-content: center;
                 align-items: center;
               }
+            }
+          }
+        }
+      }
+      .actions {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        button {
+          width: 100%;
+          max-width: 160px;
+          height: 40px;
+          border-radius: 5px;
+          border: none;
+          outline: none;
+          font-size: 18px;
+          font-weight: 500;
+          color: white;
+          cursor: pointer;
+          transition: all 0.3s;
+          &.submit {
+            background-color: darken(green, 10%);
+            &:hover {
+              background-color: green;
+            }
+          }
+          &.clear {
+            background-color: darken(red, 20%);
+            &:hover {
+              background-color: red;
             }
           }
         }

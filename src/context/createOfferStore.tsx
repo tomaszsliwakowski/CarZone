@@ -15,32 +15,37 @@ export type OfferForm = {
   capasity: string;
   phone: string;
   images: FormData[];
+  desc: string[];
 };
 
 type OfferStore = {
   form: OfferForm;
-  setFormValue: (element: keyof OfferForm, value: string) => void;
+  setFormValue: <OfferForm, T>(element: keyof OfferForm, value: T) => void;
   addFormImage: (value: FormData) => void;
   removeFormImage: (value: number) => void;
+  clearForm: () => void;
+};
+
+const emptyForm: OfferForm = {
+  brand: "",
+  model: "",
+  body: "",
+  price: "",
+  yearOfPruduction: "",
+  fuel: "",
+  mileage: "",
+  condition: "",
+  power: "",
+  transmission: "",
+  drive: "",
+  capasity: "",
+  phone: "",
+  images: [],
+  desc: [],
 };
 
 export const useCreateOfferFormStore = create<OfferStore>((set) => ({
-  form: {
-    brand: "",
-    model: "",
-    body: "",
-    price: "",
-    yearOfPruduction: "",
-    fuel: "",
-    mileage: "",
-    condition: "",
-    power: "",
-    transmission: "",
-    drive: "",
-    capasity: "",
-    phone: "",
-    images: [],
-  },
+  form: emptyForm,
   setFormValue: (element, value) => {
     set((state) => ({ form: { ...state.form, [element]: value } }));
     if (element === "brand" && value === "") {
@@ -68,5 +73,8 @@ export const useCreateOfferFormStore = create<OfferStore>((set) => ({
         form: { ...state.form, images: [...images] },
       };
     });
+  },
+  clearForm: () => {
+    set(() => ({ form: emptyForm }));
   },
 }));
