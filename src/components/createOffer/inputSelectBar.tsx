@@ -7,7 +7,7 @@ type PROPS = {
   name: string;
   placeholder: string;
   standard?: string;
-  handleChange: Function;
+  setFormValue: <OfferForm, T>(element: keyof OfferForm, value: T) => void;
   value: string;
   type: string;
   status?: boolean;
@@ -18,7 +18,7 @@ export default function InputSelectBar({
   name,
   placeholder,
   standard,
-  handleChange,
+  setFormValue,
   value,
   type,
   status = true,
@@ -30,12 +30,12 @@ export default function InputSelectBar({
   const ref = useClickOutSide(() => {
     if (state) setState(false);
     if (value !== selected) {
-      handleChange(name, selected);
+      setFormValue(name, selected);
     }
   });
 
   const selectHandler = async (el: string) => {
-    handleChange(name, el);
+    setFormValue(name, el);
     setSelected(el);
     setState(false);
     setFiltrValue("");
@@ -47,7 +47,7 @@ export default function InputSelectBar({
   };
 
   const removeSelected = async () => {
-    handleChange(name, "");
+    setFormValue(name, "");
     setSelected("");
   };
 

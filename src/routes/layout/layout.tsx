@@ -10,7 +10,6 @@ export function Layout() {
 }
 export function RequireAuth() {
   const { currentUser, isLoading } = useContext(AuthContext);
-
   return !currentUser && !isLoading ? (
     <Navigate to="/auth?type=login" />
   ) : (

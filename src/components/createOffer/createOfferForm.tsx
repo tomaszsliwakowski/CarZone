@@ -36,14 +36,9 @@ export default function CreateOfferForm() {
       clearForm: state.clearForm,
     }));
 
-  const handleChange = (element: keyof OfferForm, value: string) => {
-    setFormValue(element, value);
-  };
-
   const modelsList =
     carModels.find((item) => item.brand === form.brand)?.models || [];
 
-  console.log(form);
   return (
     <div className="createOffer__form">
       <form>
@@ -53,13 +48,30 @@ export default function CreateOfferForm() {
             <FaUser />
             <span>{currentUser?.username}</span>
           </div>
-          <InputBar
-            type="number"
-            name="phone"
-            placeholder="Phone"
-            value={form.phone}
-            handleChange={handleChange}
-          />
+          <div className="owner__container">
+            <label>
+              <span>Phone</span>
+              <InputBar
+                type="number"
+                name="phone"
+                placeholder="123-123-123"
+                value={form.phone}
+                setFormValue={setFormValue}
+                className="createOffer__inputBar"
+              />
+            </label>
+            <label>
+              <span>Location Address</span>
+              <InputBar
+                type="text"
+                name="location"
+                placeholder="( Street / Number / City )"
+                value={form.phone}
+                setFormValue={setFormValue}
+                className="createOffer__inputBar long"
+              />
+            </label>
+          </div>
         </div>
         <div className="createOffer__form__container">
           <InputSelectBar
@@ -68,7 +80,7 @@ export default function CreateOfferForm() {
               .map((item) => item.brand)}
             placeholder="Brand"
             name="brand"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.brand}
             type="text"
           />
@@ -76,7 +88,7 @@ export default function CreateOfferForm() {
             list={modelsList.filter((item) => item !== "All")}
             placeholder="Models"
             name="model"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.model}
             status={modelsList.length > 0 ? true : false}
             type="text"
@@ -85,7 +97,7 @@ export default function CreateOfferForm() {
             list={bodyTypeList}
             placeholder="Body Type"
             name="body"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.body}
             type="text"
           />
@@ -94,7 +106,7 @@ export default function CreateOfferForm() {
             placeholder="Price"
             name="price"
             standard="PLN"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.price}
             type="number"
           />
@@ -102,7 +114,7 @@ export default function CreateOfferForm() {
             list={[...yearList].reverse()}
             placeholder="Year of production"
             name="yearOfPruduction"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.yearOfPruduction}
             type="number"
           />
@@ -110,14 +122,14 @@ export default function CreateOfferForm() {
             list={fuelList}
             placeholder="Fuel Type"
             name="fuel"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.fuel}
             type="text"
           />
           <InputSelectBar
             list={mileageList}
             placeholder="Mileage"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             name="mileage"
             value={form.mileage}
             type="number"
@@ -126,7 +138,7 @@ export default function CreateOfferForm() {
             list={conditionDamagedList}
             placeholder="Condition Damage"
             name="condition"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.condition}
             type="text"
           />
@@ -134,7 +146,7 @@ export default function CreateOfferForm() {
             list={powerList}
             placeholder="Power"
             name="power"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.power}
             type="number"
           />
@@ -142,7 +154,7 @@ export default function CreateOfferForm() {
             list={gearList}
             placeholder="Transmission"
             name="transmission"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.transmission}
             type="text"
           />
@@ -150,7 +162,7 @@ export default function CreateOfferForm() {
             list={driveList}
             placeholder="Drive type"
             name="drive"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.drive}
             type="text"
           />
@@ -158,7 +170,7 @@ export default function CreateOfferForm() {
             list={capasityList}
             placeholder="Capasity"
             name="capasity"
-            handleChange={handleChange}
+            setFormValue={setFormValue}
             value={form.capasity}
             type="text"
           />
