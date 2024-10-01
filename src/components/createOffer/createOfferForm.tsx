@@ -14,10 +14,7 @@ import {
 } from "../../utils/data";
 import InputSelectBar from "./inputSelectBar";
 import "./createOffer.scss";
-import {
-  OfferForm,
-  useCreateOfferFormStore,
-} from "../../context/createOfferStore";
+import { useCreateOfferFormStore } from "../../context/createOfferStore";
 import InputBar from "./inputBar";
 import { FaUser } from "react-icons/fa";
 import { AuthContext } from "../../context/authContext";
@@ -173,6 +170,17 @@ export default function CreateOfferForm() {
             setFormValue={setFormValue}
             value={form.capasity}
             type="text"
+          />
+        </div>
+        <div className="createOffer__form__shortTitle">
+          <InputBar
+            type="text"
+            name="shortTitle"
+            placeholder="Short Title"
+            value={form.shortTitle}
+            setFormValue={setFormValue}
+            className="createOffer__inputBar full"
+            maxLength={72}
           />
         </div>
         <CreateOfferDesc setFormValue={setFormValue} />

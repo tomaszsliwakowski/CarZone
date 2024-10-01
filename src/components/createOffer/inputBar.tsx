@@ -9,6 +9,7 @@ type PROPS = {
   setFormValue: <OfferForm, T>(element: keyof OfferForm, value: T) => void;
   value: string;
   className: string;
+  maxLength?: number;
 };
 
 export default function InputBar({
@@ -18,6 +19,7 @@ export default function InputBar({
   setFormValue,
   value,
   className,
+  maxLength,
 }: PROPS) {
   const [state, setState] = useState(false);
   const [selected, setSelected] = useState<string>(value || "");
@@ -47,6 +49,7 @@ export default function InputBar({
           value={selected}
           onChange={inputHandler}
           onClick={() => setState((prev) => !prev)}
+          maxLength={maxLength}
         />
         {selected !== "" ? (
           <span onClick={() => removeSelected()}>X</span>

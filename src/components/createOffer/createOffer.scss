@@ -89,7 +89,7 @@
           color: var(--blue-color);
         }
         span {
-          font-size: 22px;
+          font-size: 20px;
           font-weight: 500;
           color: white;
         }
@@ -143,6 +143,14 @@
           input {
             width: 100%;
             max-width: 270px;
+          }
+        }
+        &.full {
+          max-width: 850px;
+          width: 100%;
+          input {
+            width: 100%;
+            max-width: 800px;
           }
         }
         .inputBar {
@@ -383,6 +391,9 @@
             }
           }
         }
+      }
+      .createOffer__form__shortTitle {
+        padding: 0 1rem;
       }
     }
   }

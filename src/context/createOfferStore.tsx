@@ -16,6 +16,7 @@ export type OfferForm = {
   phone: string;
   images: FormData[];
   desc: string[];
+  shortTitle: string;
 };
 
 type OfferStore = {
@@ -42,6 +43,7 @@ const emptyForm: OfferForm = {
   phone: "",
   images: [],
   desc: [],
+  shortTitle: "",
 };
 
 export const useCreateOfferFormStore = create<OfferStore>((set) => ({
