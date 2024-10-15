@@ -4,6 +4,8 @@ import Pagination from "../pagination/pagination";
 import Offer from "./offer";
 import "./offers.scss";
 import { ClipLoader } from "react-spinners";
+import { useFilterParams } from "../../hooks/useFilterParams";
+import { OffersSortHandler } from "../../utils/sortOffers";
 
 const override: CSSProperties = {
   display: "block",
@@ -11,12 +13,15 @@ const override: CSSProperties = {
 };
 
 export default function Offers() {
+  const { searchParams } = useFilterParams();
+  const sort = searchParams.get("sort");
+  const offers = OffersSortHandler(offersList, sort);
   return (
     <div className="offers">
       {offersList && offersList.length > 0 ? (
         <>
           <ul className="offers__list">
-            {offersList.map((offer, id) => (
+            {offers.map((offer, id) => (
               <Offer offer={offer} key={id} />
             ))}
           </ul>

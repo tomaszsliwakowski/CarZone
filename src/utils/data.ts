@@ -598,6 +598,6 @@ export const sortList: string[] = [
   "Price from the highest",
   "Mileage from the lowest",
   "Mileage from the highest",
-  "Highest engine power",
-  "Lowest engine power",
+  "Power from the lowest",
+  "Power from the highest",
 ];

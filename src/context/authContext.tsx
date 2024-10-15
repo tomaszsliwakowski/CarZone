@@ -44,11 +44,10 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       })
       .catch((res: AxiosError) => {
         const response = res.response;
-        if (!response) updateLoading(false);
         if (currentUser !== null && response?.statusText === "Unauthorized") {
           userHandler(null);
-          updateLoading(false);
         }
+        updateLoading(false);
       });
   };
   const updateLoading = (action: boolean) => {

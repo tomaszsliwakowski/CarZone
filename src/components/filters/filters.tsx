@@ -1,4 +1,3 @@
-import { memo, useEffect } from "react";
 import { useFilterParams } from "../../hooks/useFilterParams";
 import {
   bodyTypeList,
