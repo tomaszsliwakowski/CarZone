@@ -8,7 +8,10 @@ export const OffersSortHandler = (
 
   switch (sortType) {
     case "Latest":
-      sortedOffers = offers;
+      sortedOffers = offers.sort(
+        (a, b) =>
+          new Date(b.publicAt).getTime() - new Date(a.publicAt).getTime()
+      );
       break;
     case "Price from the lowest":
       sortedOffers = offers.sort(
